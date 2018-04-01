@@ -1,0 +1,66 @@
+<h2>FoodLog</h2>
+
+<div>
+	
+<ul class="Today's Entries">
+  <li *ngFor="let record of logRecords">
+      {{ record.food.name }} 
+  </li>
+</ul>
+
+<!--
+<table class="foodTable" border="1">
+	<tr>
+		<td>Time</td>
+		<td>Name</td>
+		<td>Servings</td>
+		<td>Calories (per serving)</td>
+	</tr>
+
+	<tr ng-repeat="log in logRecords">
+		<td>{{ logRecords[0].food.name }}
+		<td>{{ log.food.name }}</td>
+		<td>{{ log.time }}</td>
+		<td>{{ logRecords }}</td>
+		<td>{{ x.food.Name }}</td>
+		<td>{{ x.Servings }}</td>
+		<td>{{ x.food.Calories}}</td>
+	</tr>
+
+</table>
+-->
+
+</div>
+
+
+
+<!-- accessing each thing like the last line below works, but is stupid -->
+<!-- 
+{{logRecords}}
+{{logRecords[0]}}
+{{logRecords[0].food}}
+{{logRecords[0].food.name}} --> <!-- this one displays non garbage! -->
+
+
+
+<!-- TODO: add something like the routerlink below to the table above -->
+<!--<ul class="heroes">
+	<li *ngFor="let hero of heroes">
+	<a routerLink="/detail/{{hero.id}}">
+		<span class="badge">{{hero.id}}</span> {{hero.name}}
+	</a>
+	<button class="delete" title="delete hero"
+		(click)="delete(hero)">x</button>
+
+	</li>
+</ul>-->
+
+<!-- section to add a new food log entry -->
+<!--<div>
+  <label>Search Foods:
+    <input #foodName />
+  </label>
+  <button (click)="retrieve(foodName.value); foodName.value=''">
+    find results
+  </button>
+</div>-->
