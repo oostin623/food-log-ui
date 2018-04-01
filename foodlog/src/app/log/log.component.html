@@ -1,37 +1,32 @@
-<h2>FoodLog</h2>
+<h2>Food Log</h2>
 
 <div>
 	
-<ul class="Today's Entries">
-  <li *ngFor="let record of logRecords">
-      {{ record.food.name }} 
-  </li>
-</ul>
-
-<!--
-<table class="foodTable" border="1">
-	<tr>
-		<td>Time</td>
+<table id="logTable">
+	<!-- table header -->
+	<h3>Today's Entries</h3>
+  	<tr>
+		<td>Time Consumed</td>
 		<td>Name</td>
-		<td>Servings</td>
 		<td>Calories (per serving)</td>
-	</tr>
+		<td>Serving Size</td>
+		<td># of Servings</td>
+		<td>Total Calories</td>
 
-	<tr ng-repeat="log in logRecords">
-		<td>{{ logRecords[0].food.name }}
-		<td>{{ log.food.name }}</td>
-		<td>{{ log.time }}</td>
-		<td>{{ logRecords }}</td>
-		<td>{{ x.food.Name }}</td>
-		<td>{{ x.Servings }}</td>
-		<td>{{ x.food.Calories}}</td>
 	</tr>
+  <!-- repeated table data -->
+  <tr *ngFor="let record of logRecords">
+  		<td>{{ record.time }}</td>
+  		<td>{{ record.food.name }}</td>
+  		<td>{{ record.food.calories }}</td>
+  		<td>{{ record.food.servingSize }}</td>
+  		<td>{{ record.servings }}</td>
+  		<td>{{ (record.food.calories)*(record.servings)|number }}</td>
+  </tr>
 
 </table>
--->
 
 </div>
-
 
 
 <!-- accessing each thing like the last line below works, but is stupid -->

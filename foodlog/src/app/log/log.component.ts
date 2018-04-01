@@ -19,17 +19,21 @@ import { of }         from 'rxjs/observable/of';
 export class LogComponent implements OnInit {
 
 	logOne: LogEntry = new LogEntry(FOODS[0], "timestamp", 1);
-	logTwo: LogEntry = new LogEntry(FOODS[1], "timestamp", 1);
-	logThree: LogEntry = new LogEntry(FOODS[2], "timestamp ", 1);
+	logTwo: LogEntry = new LogEntry(FOODS[1], "timestamp", 4);
+	logThree: LogEntry = new LogEntry(FOODS[2], "timestamp ", 2.5);
 
 	logRecords: LogEntry[] = [this.logOne, this.logTwo, this.logThree];
 
-
-
+	totalCal: number;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  /* calculates the total calories for a log entry */
+  public getTotalCal(log: LogEntry): void {
+  	this.totalCal = log.food.calories * log.servings;
   }
 
 }
