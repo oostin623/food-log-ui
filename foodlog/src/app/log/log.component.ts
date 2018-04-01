@@ -14,7 +14,7 @@ import { of }         from 'rxjs/observable/of';
 @Component({
   selector: 'app-log',
   templateUrl: './log.component.html',
-  styleUrls: ['./log.component.css']
+  styleUrls: ['../app.component.css'] //changed from log to app level css
 })
 export class LogComponent implements OnInit {
 

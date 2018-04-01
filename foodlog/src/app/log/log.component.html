@@ -1,10 +1,9 @@
+<html>
 <h2>Food Log</h2>
 
-<div>
-	
+<div>	
 <table id="logTable">
-	<!-- table header -->
-	<h3>Today's Entries</h3>
+	<th>Today's Entries</th>
   	<tr>
 		<td>Time Consumed</td>
 		<td>Name</td>
@@ -12,7 +11,6 @@
 		<td>Serving Size</td>
 		<td># of Servings</td>
 		<td>Total Calories</td>
-
 	</tr>
   <!-- repeated table data -->
   <tr *ngFor="let record of logRecords">
@@ -23,10 +21,9 @@
   		<td>{{ record.servings }}</td>
   		<td>{{ (record.food.calories)*(record.servings)|number }}</td>
   </tr>
-
 </table>
-
 </div>
+</html>
 
 
 <!-- accessing each thing like the last line below works, but is stupid -->
