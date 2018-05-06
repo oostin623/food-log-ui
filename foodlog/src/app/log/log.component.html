@@ -1,9 +1,7 @@
-<html>
-<h2>Food Log</h2>
-
-<div>	
-<table id="logTable">
-	<th>Today's Entries</th>
+<div class="container" id="logListContainer">	
+  <h1>Log List Component</h1>
+  <table id="log table">
+	 <th>Today's Entries</th>
   	<tr>
 		<td>Time Consumed</td>
 		<td>Name</td>
@@ -23,7 +21,14 @@
   </tr>
 </table>
 </div>
-</html>
+
+<!-- below is a template driven form.  can also use a react driven approach
+
+<h2>Add new entry</h2>
+
+<form (ngSubmit)="onSubmit()" #logForm="ngForm" id="log entry form">
+
+</form> -->
 
 
 <!-- accessing each thing like the last line below works, but is stupid -->

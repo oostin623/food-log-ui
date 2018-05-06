@@ -1,4 +1,6 @@
-/* application wide CSS styles */
+@import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+/* application wide CSS styles 
 html {
   background-color: #003333;
 }
@@ -26,4 +28,5 @@ tr {
 
 tr:first-child td{
   font-weight: bold;
-}
+} 
+*/
