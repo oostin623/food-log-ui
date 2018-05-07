@@ -3,7 +3,7 @@ diagnostic: {{diagnostic}}
 
 <div class="container" id="logFormContainer">
     <h1>Log Form Component</h1>
-    <form #logForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #logForm="ngForm">
 
       <div>
       	<h3>Entry Date - {{model.date | date}}</h3>
@@ -71,7 +71,59 @@ diagnostic: {{diagnostic}}
       <button type="button" class="btn btn-default" (click)="newRecord(); logForm.reset()">New Record</button>
 
  	  <!-- button to submit data for current record -->
-      <button type="submit" class="btn btn-success">Submit</button>
-
+      <button type="submit" class="btn btn-success" [disabled]="!logForm.form.valid">Submit</button>
     </form>
+</div>
+
+<div [hidden]="!submitted">
+
+  <h2>You submitted the following Log Record:</h2>
+  <!--
+  <div class="row">
+    <div class="col-xs-3">Food Name</div>
+    <div class="col-xs-9  pull-left">{{ model.name }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Cal</div>
+    <div class="col-xs-9 pull-left">{{ model.calories }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Fat</div>
+    <div class="col-xs-9 pull-left">{{ model.fat }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Carb</div>
+    <div class="col-xs-9 pull-left">{{ model.carbs }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Prot</div>
+    <div class="col-xs-9 pull-left">{{ model.protein }}</div>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">Time</div>
+    <div class="col-xs-9 pull-left">{{ model.date | date :'shortTime'}}</div>
+  </div>
+  <br>
+  <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+-->
+
+  <table id="log table">
+	 <th>Today's Entries</th>
+  	<tr>
+		<td>Time Consumed</td>
+		<td>Name</td>
+		<td>Calories (per serving)</td>
+		<td>Servings</td>
+		<td>Total Calories</td>
+	</tr>
+  <!-- repeated table data -->
+  <tr *ngFor="let record of logDay">
+  		<td>{{ record.date | date :'shortTime'}}</td>
+  		<td>{{ record.name }}</td>
+  		<td>{{ record.calories }}</td>
+  		<td>{{ record.servings }}</td>
+  		<td>{{ (record.calories)*(record.servings) | number }}</td>
+  </tr>
+</table>
+
 </div>

@@ -8,34 +8,22 @@ import { LogRecord } from '../log-record';
   styleUrls: ['./log-form.component.css']
 })
 export class LogFormComponent {
-
-  model : LogRecord;
-  submitted;
-  dayCounter;
-
-  //component start up
-  ngOnInit() {
-  	this.dayCounter = 0;
-  	this.newRecord(); 	
-  }
+  logDay : LogRecord[] = [];
+  model : LogRecord = new LogRecord('String Cheese', 120, 8, 10, 5, 1, new Date(Date.now()));
+  submitted = false;
+  recordCounter = 0;
 
   //form submission
   onSubmit() {
   	this.submitted = true;
+  	this.logDay[this.recordCounter] = this.model;
+  	this.newRecord();
+  	this.recordCounter++;
   }
 
-  //TODO: remove when we are done
-  get diagnostic() { 
-  	return JSON.stringify(this.model);
-  }
-
+  //create a new log record
   newRecord() {
-  	var date : Date = new Date(Date.now());
-  	date.setDate(date.getDate() + this.dayCounter);
-
-    this.model = new LogRecord('', 0, 0, 0, 0, 1, date);
-    this.submitted = false;
-    this.dayCounter++;
+    this.model = new LogRecord('', 0, 0, 0, 0, 1, new Date(Date.now()));
   }
 
   //takes an "HH:MM" string and updates the hour and minute on the record's date
@@ -44,5 +32,10 @@ export class LogFormComponent {
   	var hm : string[] = time.toString().split(":");
   	date.setHours(Number.parseInt(hm[0]), Number.parseInt(hm[1]));
   	return date;
+  }
+
+  //TODO: remove when we are done
+  get diagnostic() { 
+  	return JSON.stringify(this.model);
   }
 }

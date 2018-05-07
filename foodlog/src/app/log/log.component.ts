@@ -9,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 //data objects
 import { LogEntry } from '../LogEntry';
 import { Food } from '../Food';
-import { FOODS } from '../Mock_foods';
-
+import { FOODS } from '../Mock_foods'; 
 
 @Component({
   selector: 'app-log',
