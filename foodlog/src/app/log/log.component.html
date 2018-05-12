@@ -1,63 +1,32 @@
 <div class="container" id="logListContainer">	
   <h1>Log List Component</h1>
-  <table id="log table">
-	 <th>Today's Entries</th>
-  	<tr>
-		<td>Time Consumed</td>
-		<td>Name</td>
-		<td>Calories (per serving)</td>
-		<td>Serving Size</td>
-		<td># of Servings</td>
-		<td>Total Calories</td>
-	</tr>
+   <table id="log table">
+   <th>Today's Entries</th>
+    <tr>
+    <td>Time Consumed</td>
+    <td>Name</td>
+    <td>Calories (per serving)</td>
+    <td>Servings</td>
+    <td>Total Calories</td>
+  </tr>
   <!-- repeated table data -->
   <tr *ngFor="let record of logRecords">
-  		<td>{{ record.time }}</td>
-  		<td>{{ record.food.name }}</td>
-  		<td>{{ record.food.calories }}</td>
-  		<td>{{ record.food.servingSize }}</td>
-  		<td>{{ record.servings }}</td>
-  		<td>{{ (record.food.calories)*(record.servings)|number }}</td>
+      <td>{{ record.date | date :'shortTime'}}</td>
+      <td>{{ record.name }}</td>
+      <td>{{ record.calories }}</td>
+      <td>{{ record.servings }}</td>
+      <td>{{ (record.calories)*(record.servings) | number }}</td>
   </tr>
 </table>
+<!-- OLD FORMAT
+  <tr *ngFor="let record of logRecords">
+      <td>{{ record.time }}</td>
+      <td>{{ record.food.name }}</td>
+      <td>{{ record.food.calories }}</td>
+      <td>{{ record.food.servingSize }}</td>
+      <td>{{ record.servings }}</td>
+      <td>{{ (record.food.calories)*(record.servings)|number }}</td>
+  </tr>
+  </table>
+-->
 </div>
-
-<!-- below is a template driven form.  can also use a react driven approach
-
-<h2>Add new entry</h2>
-
-<form (ngSubmit)="onSubmit()" #logForm="ngForm" id="log entry form">
-
-</form> -->
-
-
-<!-- accessing each thing like the last line below works, but is stupid -->
-<!-- 
-{{logRecords}}
-{{logRecords[0]}}
-{{logRecords[0].food}}
-{{logRecords[0].food.name}} --> <!-- this one displays non garbage! -->
-
-
-
-<!-- TODO: add something like the routerlink below to the table above -->
-<!--<ul class="heroes">
-	<li *ngFor="let hero of heroes">
-	<a routerLink="/detail/{{hero.id}}">
-		<span class="badge">{{hero.id}}</span> {{hero.name}}
-	</a>
-	<button class="delete" title="delete hero"
-		(click)="delete(hero)">x</button>
-
-	</li>
-</ul>-->
-
-<!-- section to add a new food log entry -->
-<!--<div>
-  <label>Search Foods:
-    <input #foodName />
-  </label>
-  <button (click)="retrieve(foodName.value); foodName.value=''">
-    find results
-  </button>
-</div>-->

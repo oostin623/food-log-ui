@@ -2,16 +2,29 @@ import { Component, OnInit } from '@angular/core';
 
 import { LogRecord } from '../log-record';
 
+import  { LogService } from '../log.service';
+
 @Component({
   selector: 'app-log-form',
+  providers: [LogService],
   templateUrl: './log-form.component.html',
   styleUrls: ['./log-form.component.css']
 })
 export class LogFormComponent {
-  logDay : LogRecord[] = [];
+  logDay : LogRecord[];
   model : LogRecord = new LogRecord('String Cheese', 120, 8, 10, 5, 1, new Date(Date.now()));
   submitted = false;
   recordCounter = 0;
+
+  constructor(private logService: LogService) { }
+
+  ngOnInit() {
+    this.getLogRecords();
+  }
+
+   public getLogRecords(): void {
+    this.logDay = this.logService.getRecords();
+  }
 
   //form submission
   onSubmit() {
