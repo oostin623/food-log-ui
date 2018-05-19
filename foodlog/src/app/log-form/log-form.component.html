@@ -2,12 +2,12 @@
 diagnostic: {{diagnostic}}
 
 <div class="container" id="logFormContainer">
-    <h1>Log Form Component</h1>
+    <h1>Log Form</h1>
     <form (ngSubmit)="onSubmit()" #logForm="ngForm">
 
       <div>
-      	<h3>Entry Date - {{model.date | date}}</h3>
-        <h4>Entry Time - {{model.date | date :'shortTime'}}</h4>
+      	<h3>Entry Date - {{formLogRecord.date | date}}</h3>
+        <h4>Entry Time - {{formLogRecord.date | date :'shortTime'}}</h4>
       </div>
     	
       <div class="form-group">
@@ -15,7 +15,7 @@ diagnostic: {{diagnostic}}
         <input type="text" class="form-control" id="name" 
         required
 
-        [(ngModel)]="model.name" name="name" 
+        [(ngModel)]="formLogRecord.name" name="name" 
         #name="ngModel">
       </div>
       <!--pop up warning if name missing -->
@@ -28,42 +28,42 @@ diagnostic: {{diagnostic}}
         <label for="calories">Calories</label>
         <input type="number" class="form-control" id="calories"
         required
-        [(ngModel)]="model.calories" name="calories">
+        [(ngModel)]="formLogRecord.calories" name="calories">
       </div>
 
       <div class="form-group">
         <label for="fat">Fat</label>
         <input type="number" class="form-control" id="fat"
         required
-        [(ngModel)]="model.fat" name="fat">
+        [(ngModel)]="formLogRecord.fat" name="fat">
       </div>
 
       <div class="form-group">
         <label for="carbs">Carbs</label>
         <input type="number" class="form-control" id="carbs"
         required
-        [(ngModel)]="model.carbs" name="carbs">
+        [(ngModel)]="formLogRecord.carbs" name="carbs">
       </div>
 
       <div class="form-group">
         <label for="protein">Protein</label>
         <input type="number" class="form-control" id="protein"
         required
-        [(ngModel)]="model.protein" name="protein">
+        [(ngModel)]="formLogRecord.protein" name="protein">
       </div>
 
       <div class="form-group">
         <label for="servings">Servings</label>
         <input type="number" class="form-control" id="servings"
         required
-        [(ngModel)]="model.servings" name="servings">
+        [(ngModel)]="formLogRecord.servings" name="servings">
       </div>
       <!-- using the chrome time tag for valid input -->
       <div class="form-group">
         <label for="time">Time Consumed</label>
         <input type="time" class="form-control" id="time"
-         [ngModel]="model.date" 
-         (ngModelChange)="model.date = setDateTime($event)"
+         [ngModel]="formLogRecord.date" 
+         (ngModelChange)="formLogRecord.date = setDateTime($event)"
          name="time">
       </div>
  
@@ -77,7 +77,7 @@ diagnostic: {{diagnostic}}
 
 <!-- LOG TABLE -->
 
-<div [hidden]="!submitted">
+<div class="container" [hidden]="!submitted">
 
   <h2>You submitted the following Log Record:</h2>
 

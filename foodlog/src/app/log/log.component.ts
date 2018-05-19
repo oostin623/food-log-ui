@@ -1,6 +1,7 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 
-//data objects
+
 import { LogEntry } from '../LogEntry';
 import { LogRecord } from '../log-record';
 import { Food } from '../Food';
@@ -14,40 +15,36 @@ import  { LogService } from '../log.service';
   templateUrl: './log.component.html',
   styleUrls: ['./log.component.css']
 })
-export class LogComponent implements OnInit {
+export class LogComponent implements OnDestroy {
 
-  //dummy data. TODO: move to a dummy service provider
-	//logOne: LogEntry = new LogEntry(FOODS[0], "timestamp", 1);
-	//logTwo: LogEntry = new LogEntry(FOODS[1], "timestamp", 4);
-	//logThree: LogEntry = new LogEntry(FOODS[2], "timestamp ", 2.5);
+  private subscription: Subscription;
 
-	logRecords : LogRecord[];
+  logDayState : LogRecord;
+  logDay : LogRecord[] = [];
+  
 
-  //logRecord :
-  //  LogEntry[] =
-  //  [this.logOne, this.logTwo, this.logThree];
+  constructor(private logService: LogService) { 
 
-	totalCal: number;
+    this.logDayState = new LogRecord('Bagle', 200, 20, 5, 15, 1, new Date(Date.now()));
 
-  constructor(private logService: LogService) { }
-
-  ngOnInit() {
-    this.getLogRecords();
+    this.subscription = this.logService.getState().subscribe(
+      logDayState => {
+        console.log("log component: the logDayState was updated with the formLogRecord: " + JSON.stringify(logDayState));
+        this.logDayState = logDayState;
+        this.logDay.push(logDayState);
+      });
   }
 
-  ngOnChanges() {
-    this.getLogRecords();
+  
+
+  ngOnDestroy() {
+    // prevent memory leak when component is destroyed
+    this.subscription.unsubscribe();
   }
 
 
-
-  /* calculates the total calories for a log entry */
-  public getTotalCal(log: LogEntry): void {
-    this.totalCal = log.food.calories * log.servings;
+  //TODO: remove when we are done
+  get diagnostic() { 
+    return JSON.stringify(this.logDayState);
   }
-
-  public getLogRecords(): void {
-    this.logRecords = this.logService.getRecords();
-  }
-
 }

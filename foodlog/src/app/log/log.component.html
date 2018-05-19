@@ -1,5 +1,10 @@
 <div class="container" id="logListContainer">	
-  <h1>Log List Component</h1>
+
+  <h1>Log Table</h1>
+
+    diagnostic of logDayState: {{diagnostic}}
+
+
    <table id="log table">
    <th>Today's Entries</th>
     <tr>
@@ -10,22 +15,22 @@
     <td>Total Calories</td>
   </tr>
   <!-- repeated table data -->
-  <tr *ngFor="let record of logRecords">
-      <td>{{ record.date | date :'shortTime'}}</td>
-      <td>{{ record.name }}</td>
-      <td>{{ record.calories }}</td>
-      <td>{{ record.servings }}</td>
-      <td>{{ (record.calories)*(record.servings) | number }}</td>
+  <tr *ngFor="let log of logDay">
+      <td>{{ log.date | date :'shortTime'}}</td>
+      <td>{{ log.name }}</td>
+      <td>{{ log.calories }}</td>
+      <td>{{ log.servings }}</td>
+      <td>{{ (log.calories)*(log.servings) | number }}</td>
   </tr>
 </table>
 <!-- OLD FORMAT
-  <tr *ngFor="let record of logRecords">
-      <td>{{ record.time }}</td>
-      <td>{{ record.food.name }}</td>
-      <td>{{ record.food.calories }}</td>
-      <td>{{ record.food.servingSize }}</td>
-      <td>{{ record.servings }}</td>
-      <td>{{ (record.food.calories)*(record.servings)|number }}</td>
+  <tr *ngFor="let log of loglogs">
+      <td>{{ log.time }}</td>
+      <td>{{ log.food.name }}</td>
+      <td>{{ log.food.calories }}</td>
+      <td>{{ log.food.servingSize }}</td>
+      <td>{{ log.servings }}</td>
+      <td>{{ (log.food.calories)*(log.servings)|number }}</td>
   </tr>
   </table>
 -->
