@@ -5,6 +5,7 @@ import { FormsModule }   from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LogComponent } from './log/log.component';
 import { LogFormComponent } from './log-form/log-form.component';
+import  { LogService } from './log.service';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { LogFormComponent } from './log-form/log-form.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

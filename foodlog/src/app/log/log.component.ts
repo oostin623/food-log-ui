@@ -11,31 +11,25 @@ import  { LogService } from '../log.service';
 
 @Component({
   selector: 'app-log',
-  providers: [LogService],
+  providers: [],
   templateUrl: './log.component.html',
   styleUrls: ['./log.component.css']
 })
-export class LogComponent implements OnDestroy {
-
-  private subscription: Subscription;
-
+export class LogComponent{
+  subscription: Subscription;
   logDayState : LogRecord;
   logDay : LogRecord[] = [];
   
 
   constructor(private logService: LogService) { 
-
     this.logDayState = new LogRecord('Bagle', 200, 20, 5, 15, 1, new Date(Date.now()));
-
     this.subscription = this.logService.getState().subscribe(
       logDayState => {
         console.log("log component: the logDayState was updated with the formLogRecord: " + JSON.stringify(logDayState));
         this.logDayState = logDayState;
         this.logDay.push(logDayState);
       });
-  }
-
-  
+  }  
 
   ngOnDestroy() {
     // prevent memory leak when component is destroyed

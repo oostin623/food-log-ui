@@ -1,4 +1,6 @@
 import { Injectable} from '@angular/core';
+
+//FIXME: make this into a fancy behavior subject that returns a full array of values.
 //import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LogRecord } from './log-record';
 
@@ -16,16 +18,18 @@ export class LogService {
   //LogDay$= this._LogDaySource.asObservable();
 
   private logDayState = new Subject<LogRecord>();
+  private logDayObservable: Observable<LogRecord>;
+
+  constructor() {
+  	this.logDayObservable = this.logDayState.asObservable();
+  }
 
   setState(state: LogRecord) {
-  	console.log("log service: setState() has been called with" + JSON.stringify(state));
     this.logDayState.next(state);
   }
 
   getState(): Observable<any> {
-  	console.log("log service: getState() has been called. returning the LogRecord observable:" + JSON.stringify(this.logDayState));
-  	console.log("log service: the observable version of the LogRecord: " + this.logDayState.asObservable.toString());
-    return this.logDayState.asObservable();
+    return this.logDayObservable;
   }
 
 

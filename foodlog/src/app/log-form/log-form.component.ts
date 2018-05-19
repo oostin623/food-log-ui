@@ -5,7 +5,7 @@ import  { LogService } from '../log.service';
 
 @Component({
   selector: 'app-log-form',
-  providers: [LogService],
+  providers: [],
   templateUrl: './log-form.component.html',
   styleUrls: ['./log-form.component.css']
 })
@@ -20,7 +20,7 @@ export class LogFormComponent {
   constructor(private logService: LogService) { 
       this.subscription = this.logService.getState().subscribe(
       logDayState => {
-        console.log("log component: the logDayState was updated with the formLogRecord: " + JSON.stringify(logDayState));
+        console.log("log form component: the logDayState was updated with the formLogRecord: " + JSON.stringify(logDayState));
         this.logDayState = logDayState;
         this.logDay.push(logDayState);
       });
@@ -47,7 +47,7 @@ export class LogFormComponent {
 
   // create a new log record
   newRecord() {
-    this.formLogRecord = new LogRecord('', 0, 0, 0, 0, 1, new Date(Date.now()));
+    this.formLogRecord = new LogRecord('dummy name', 0, 0, 0, 0, 1, new Date(Date.now()));
   }
 
   // takes an "HH:MM" string and updates the hour and minute on the record's date
