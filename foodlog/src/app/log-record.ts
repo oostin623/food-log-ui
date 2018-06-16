@@ -1,6 +1,5 @@
 export class LogRecord {
 
-
 	constructor(
 		public name: string,
 		public calories: number,
@@ -11,4 +10,5 @@ export class LogRecord {
 		public date: Date,
 		){ }
 }
+
 

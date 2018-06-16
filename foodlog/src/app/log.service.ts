@@ -1,41 +1,37 @@
 import { Injectable} from '@angular/core';
-
 //FIXME: make this into a fancy behavior subject that returns a full array of values.
-//import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { LogRecord } from './log-record';
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
+//import { Subject } from 'rxjs/Subject';
 
 
 @Injectable()
 export class LogService {
 
-  // Observable source
-  //private _LogDaySource = new BehaviorSubject<LogRecord[]>([]);
+  private _LogDaySource: BehaviorSubject<LogRecord[]>;
+  private _LogDayStore: {
+  	records: LogRecord[]
+  };
 
-  // Observable stream
-  //LogDay$= this._LogDaySource.asObservable();
-
-  private logDayState = new Subject<LogRecord>();
-  private logDayObservable: Observable<LogRecord>;
 
   constructor() {
-  	this.logDayObservable = this.logDayState.asObservable();
+  	this._LogDayStore = { records: [] };
+  	this._LogDaySource = <BehaviorSubject<LogRecord[]>>new BehaviorSubject([]);
   }
 
-  setState(state: LogRecord) {
-    this.logDayState.next(state);
+   getLogDay(): Observable<any> {
+    return this._LogDaySource.asObservable();
   }
 
-  getState(): Observable<any> {
-    return this.logDayObservable;
+  setLogDay(records: LogRecord[]) {
+  	this._LogDayStore.records = records;
   }
 
 
-  // service command
-  // this tells everything else the LogDay has changed.
- // changeLogDay(logday: LogRecord[]) {
-    //this._LogDaySource.next(logday);
- // }
+ 
+
+
+
 }
