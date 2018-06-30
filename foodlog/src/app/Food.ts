@@ -1,22 +1,24 @@
 export class Food {
 
-	id: number;
+	/**id: number;
 	name: string;
 	calories: number;
-	servingSize: string;
+	servingUnit: string;
+	servingSize: number;**/
 
-/*	fat: number;
-	carbs: number;
-	protein: number;
-	addedSugar: number;
-	notes: string; */
 
-	constructor (id: number, name: string, calories: number, servingSize) 
-	{
-	//	this.id = id;
-	//	this.name = name;
-	//	this.calories = calories;
-	//  this.servingSize = servingSize;
-	}
+	//typescript implicity populates class properties with these values.
+	//no need to define them or assign them.
+	constructor (
+		id: number, 
+		name: string, 
+		calories: number,
+		fat?: number,
+		carbs?: number,
+		protein?: number,
+		servingUnit?: string, 
+		servingSize?: number
+		) 
+	{}
 
 }

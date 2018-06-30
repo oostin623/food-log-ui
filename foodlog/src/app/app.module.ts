@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { LogComponent } from './log/log.component';
 import { LogFormComponent } from './log-form/log-form.component';
 import  { LogService } from './log.service';
+import { FoodDictComponent } from './food-dict/food-dict.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LogComponent,
-    LogFormComponent
+    LogFormComponent,
+    FoodDictComponent
   ],
   imports: [
     BrowserModule,
