@@ -1,0 +1,130 @@
+<div class="container">
+	<h1>Food Dictionary Component</h1>
+	<h3>Current Food Model: {{food | json}}</h3>
+
+<!-- FormsModule is being used implicity for this form
+        this is implicitly added to the form tag, 
+        giving us a FormControl registered to the 
+        name attribute defined below. -->
+
+	<form (ngSubmit)="onSubmit()" #foodForm="ngForm">
+
+		<!-- insert dummy food -->
+		   <button type="button" class="btn btn-default" (click)="populateTestFood()">
+		   	Populate Test Food</button>
+
+		   	<h3 *ngIf="editingExistingFood">Editing Food with id: {{food.id}}</h3>
+	
+	  <!-- name -->    	
+	      <div class="form-group">
+	        <label for="name">Name</label>
+	        <!-- name is required -->
+	        <input type="text" class="form-control" id="name" 
+	        required
+	        [(ngModel)]="food.name" name="name" 
+	        #name="ngModel"> <!-- used to display the pop up below -->
+	      </div>
+	      <!--pop up warning if name missing -->
+	      <div [hidden]="name.valid || name.pristine"
+	        class="alert alert-danger">
+	  	    Name is required
+		    </div>
+	 
+	  <!-- calories -->
+	      <div class="form-group">
+	        <label for="calories">Calories</label>
+	        <input type="number" class="form-control" id="calories"
+	        required
+	        [(ngModel)]="food.calories" name="calories"
+	        #calories="ngModel">
+	      </div>
+	      <!--pop up warning if calories are missing -->
+	      <div [hidden]="calories.valid || calories.pristine"
+	        class="alert alert-danger">
+	  	    Calories are required
+		  </div>
+
+    <!-- fat, carb, protein -->
+	      <div class="form-group">
+	        <label for="fat">Fat</label>
+	        <input type="number" class="form-control" id="fat"
+	        required
+	        [(ngModel)]="food.fat" name="fat">
+	      </div>
+
+	      <div class="form-group">
+	        <label for="carbs">Carbs</label>
+	        <input type="number" class="form-control" id="carbs"
+	        required
+	        [(ngModel)]="food.carbs" name="carbs">
+	      </div>
+
+	      <div class="form-group">
+	        <label for="protein">Protein</label>
+	        <input type="number" class="form-control" id="protein"
+	        required
+	        [(ngModel)]="food.protein" name="protein">
+	      </div>
+
+    <!-- serving unit & amount -->
+	      <div class="form-group">
+	        <label for="servingUnit">Serving Unit</label>
+	        <select class="form-control" id="servingUnit" 
+	          required
+	          [(ngModel)]="food.servingUnit" name="serving unit">
+    				  <option *ngFor= "let unit of servingUnits" [value]="unit"> {{unit}}</option>
+  				</select>
+	      </div>
+
+	      <div class="form-group">
+	        <label for="servings">Serving Size</label>
+	        <input type="number" class="form-control" id="serving size"
+	        required
+	        [(ngModel)]="food.servingSize" name="serving size">
+	      </div>
+	
+	 
+	 	  <!-- button to generate a new record form to populate -->
+	 	    <!-- note we chain together template statements here -->
+	      <button type="button" class="btn btn-default" (click)="clearFood(); foodForm.reset()">New Record</button>
+
+	 	  <!-- button to submit data for current record -->
+	      <button type="submit" class="btn btn-success" [disabled]="!foodForm.form.valid">Submit</button>
+
+	     <!-- set food name -->
+	      <button type="button" class="btn btn-default" (click)="setTheCurrentFoodName()">Set Name</button>
+	</form>
+
+	<div [hidden]="!submitted">
+
+	  <h2>You have submitted the following foods:</h2>
+	  <button class="btn btn-primary" (click)="submitted=false">Hide List</button>
+
+	  <div *ngFor="let entry of foodDict">
+	    <div class="row">
+	      <div class="col-xs-3">Id</div>
+	      <div class="col-xs-9  pull-left">{{ entry.id }}</div>
+	    </div>
+	    <div class="row">
+	      <div class="col-xs-3">Name</div>
+	      <div class="col-xs-9  pull-left">{{ entry.name }}</div>
+	    </div>
+	    <div class="row">
+	      <div class="col-xs-3">Calries</div>
+	      <div class="col-xs-9 pull-left">{{ entry.calories }}</div>
+	    </div>
+	    <!-- TODO: confirm this ngIf works how I think it does -->
+	    <div class="row" *ngIf="entry?.fat">
+	      <div class="col-xs-3">Power</div>
+	      <div class="col-xs-9 pull-left">{{ entry.fat }}</div>
+	    </div>
+	    <br>
+    	<button class="btn btn-primary" (click)="submitted=false; setFoodToEdit(entry)">Edit</button>
+  	</div>
+
+  </div>
+
+</div>
+
+
+
