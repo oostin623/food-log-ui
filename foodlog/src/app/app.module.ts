@@ -7,6 +7,8 @@ import { LogComponent } from './log/log.component';
 import { LogFormComponent } from './log-form/log-form.component';
 import  { LogService } from './log.service';
 import { FoodDictComponent } from './food-dict/food-dict.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -14,11 +16,13 @@ import { FoodDictComponent } from './food-dict/food-dict.component';
     AppComponent,
     LogComponent,
     LogFormComponent,
-    FoodDictComponent
+    FoodDictComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [LogService],
   bootstrap: [AppComponent]

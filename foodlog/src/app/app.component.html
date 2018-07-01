@@ -1,15 +1,22 @@
 <!-- MAIN PAGE OF THE APPLICATRION -->
+<html style="background-color: white">
 
-<html>
-<h1>{{title}}</h1>
+<!-- nav bar -->
+	<div class="container" style="background-color: seagreen">
+		<nav>
+			<a routerLink="/">Home</a>
+		  <a routerLink="/food-dict">Food Dict</a>
+		  <a routerLink="/food-log">Meal Log</a>
+		</nav>
+	</div>
+
+<!-- handles the URL routing -->
+	<router-outlet></router-outlet>
+
+	<!-- 
+	<app-food-dict></app-food-dict>
+	<app-log-form></app-log-form>
+	<app-log></app-log> 
+	-->
+
 </html>
-
-<app-food-dict></app-food-dict>
-
-<!-- form to add new log entries -->
-<app-log-form></app-log-form>
-
-<!-- table of log entries -->
-<app-log></app-log>
-	
-<!-- log day search -->

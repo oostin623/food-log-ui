@@ -10,10 +10,10 @@
 	<form (ngSubmit)="onSubmit()" #foodForm="ngForm">
 
 		<!-- insert dummy food -->
-		   <button type="button" class="btn btn-default" (click)="populateTestFood()">
+		  <button type="button" class="btn btn-default" (click)="populateTestFood()">
 		   	Populate Test Food</button>
 
-		   	<h3 *ngIf="editingExistingFood">Editing Food with id: {{food.id}}</h3>
+		  <h3 *ngIf="editingExistingFood">Editing Food with id: {{food.id}}</h3>
 	
 	  <!-- name -->    	
 	      <div class="form-group">

@@ -10,8 +10,8 @@ import  { LogService } from '../log.service';
   styleUrls: ['./log-form.component.css']
 })
 export class LogFormComponent {
-  logDay : LogRecord[] = [];
-  formLogRecord : LogRecord = new LogRecord('String Cheese', 120, 8, 10, 5, 1, new Date(Date.now()));
+  logDay: LogRecord[] = [];
+  formLogRecord: LogRecord = new LogRecord('String Cheese', 120, 8, 10, 5, 1, new Date(Date.now()));
   submitted = false;
   logDayState: LogRecord;
   subscription: Subscription;
