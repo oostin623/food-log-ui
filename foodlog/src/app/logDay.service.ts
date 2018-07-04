@@ -10,7 +10,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class LogService {
+export class LogDayService {
 
   private logDayUrl = 'api/logDay';  // URL to web api
  

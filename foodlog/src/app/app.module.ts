@@ -8,9 +8,11 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService }  from './in-memory-data-service';
 
 import { AppComponent } from './app.component';
-import { LogComponent } from './log/log.component';
 import { LogFormComponent } from './log-form/log-form.component';
-import  { LogService } from './log.service';
+
+import  { LogDayService } from './logDay.service';
+import  { FoodService } from './food.service';
+
 import { FoodDictComponent } from './food-dict/food-dict.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -19,7 +21,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LogComponent,
     LogFormComponent,
     FoodDictComponent,
     DashboardComponent
@@ -36,7 +37,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
       InMemoryDataService, { dataEncapsulation: false }
     )
   ],
-  providers: [LogService],
+  providers: [LogDayService, FoodService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import { LogRecord } from '../log-record';
-import { LogService } from '../log.service';
+import { LogDayService } from '../logDay.service';
  
 @Component({
   selector: 'app-dashboard',
@@ -11,14 +11,14 @@ import { LogService } from '../log.service';
 export class DashboardComponent implements OnInit {
   logDay: LogRecord[] = [];
   
-  constructor(private logService: LogService) { }
+  constructor(private logDayService: LogDayService) { }
 
   ngOnInit() {
     this.getLogDay()
   }
 
   getLogDay() {
-    this.logService.getLogDay()
+    this.logDayService.getLogDay()
     .subscribe(logDay => this.logDay = logDay);
   }
 

@@ -1,14 +1,9 @@
 export class Food {
 
-	/**id: number;
+	id: number;
 	name: string;
 	calories: number;
-	servingUnit: string;
-	servingSize: number;**/
 
-
-	//typescript implicity populates class properties with these values.
-	//no need to define them or assign them.
 	constructor (
 		id: number, 
 		name: string, 
@@ -18,7 +13,12 @@ export class Food {
 		protein?: number,
 		servingUnit?: string, 
 		servingSize?: number
-		) 
-	{}
+		)
+	{ 
+
+		this.id = id;
+		this.name = name;
+		this.calories = calories;
+	}
 
 }

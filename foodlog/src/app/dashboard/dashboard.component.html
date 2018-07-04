@@ -12,7 +12,7 @@
 	  <a *ngFor="let record of logDay" class="col-1-4">
 	    <div class="module FoodLog">
 	      <h4>{{record.name}}</h4>
-	      <div>calories: {{record.calories}}</div>
+	      <div>calories: {{record.food.calories}}</div>
 	      <div>servings: {{record.servings}}</div>
 	    </div>
 	  </a>
