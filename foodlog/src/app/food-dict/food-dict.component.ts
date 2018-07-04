@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import {Subscription} from 'rxjs/Subscription';
 import { Food } from '../Food';
+import { FoodService } from '../food.service';
 
 @Component({
   selector: 'app-food-dict',
@@ -8,38 +9,40 @@ import { Food } from '../Food';
   styleUrls: ['./food-dict.component.css']
 })
 export class FoodDictComponent {
-
-	//Initialize empty  food dict array
 	foodDict: Food[] = [];
 
 	//possible serving units for the drop down
 	servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
 
-	foodCount = 0;
-
-  //oddly enough, the ngModel in the form is bound to this, but will only update the
-  //display when it detects a change. still need a valid object here though.
 	food: Food;
 	submitted = false;
 	showList = false;
 	editingExistingFood = false;
 
-	constructor() {
-		this.resetFoodModel();
-	}
+  constructor(private foodService: FoodService) {
+	  this.resetFoodModel();
+  }
+
+  ngOnInit() { 
+    this.getFoodDict();
+  }
+
+  getFoodDict(): void {
+    this.foodService.getFoodDict()
+      .subscribe(foodDict => this.foodDict = foodDict);
+  }
 
 	resetFoodModel() {
-		this.food = new Food(this.foodCount, '', 0);
+		this.food = new Food(null, '', 0);
 		this.editingExistingFood = false;
 	}
 
 	onSubmit() {		
 	  //maintain the id if editing an existing food
-		if (!this.editingExistingFood) { 
-			this.food['id'] = this.foodCount;
-			this.foodCount++;
-			this.foodDict.push(this.food); 
-		}
+	  this.foodService.addFood(this.food)
+      .subscribe(food => {
+        this.foodDict.push(food);
+      });
 		this.submitted = true;
 		this.showList = true;
 		this.resetFoodModel();
@@ -66,7 +69,7 @@ export class FoodDictComponent {
 	/** +++++++++++++++++++++++++++++++ TEST FUNCTIONS ++++++++++++++++++++++++ **/
 
 	populateTestFood() {
-		this.food['id'] = this.foodCount;
+		this.food['id'] = null;
 		this.food['name'] = 'test food';
 		this.food['calories'] = 100;
 		this.food['fat'] = 10;

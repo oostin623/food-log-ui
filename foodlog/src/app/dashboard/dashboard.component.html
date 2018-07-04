@@ -11,7 +11,7 @@
 	<div class="grid grid-pad">
 	  <a *ngFor="let record of logDay" class="col-1-4">
 	    <div class="module FoodLog">
-	      <h4>{{record.name}}</h4>
+	      <h4>{{record.food.name}}</h4>
 	      <div>calories: {{record.food.calories}}</div>
 	      <div>servings: {{record.servings}}</div>
 	    </div>

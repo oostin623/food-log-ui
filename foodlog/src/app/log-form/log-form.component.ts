@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 import { Food } from '../Food';
 import { LogRecord } from '../log-record';
 import  { LogDayService } from '../logDay.service';
-
+import { FoodService } from '../food.service';
 
 @Component({
   selector: 'app-log-form',
@@ -13,27 +13,25 @@ import  { LogDayService } from '../logDay.service';
 })
 export class LogFormComponent {
   logDay: LogRecord[] = [];
+  foodDict: Food[] = [];
   formLogRecord: LogRecord = new LogRecord(null, null, 1, new Date(Date.now()));
   submitted = false;
 
+  constructor(
+    private logDayService: LogDayService,
+    private foodService: FoodService) { }
 
-
- mockFoods: Food[]
-  = [
-   new Food(10, "apple (medium)", 80),
-   new Food(11, "cake", 120),
-   new Food(12, "cerial", 110)
-  ];
-
-  // inject the log service
-  constructor(private logDayService: LogDayService) { }
-
-  // initialize the logDay from the service
+  /** initial subscription to the shared services */
   ngOnInit() { 
+    this.getFoodDict();
     this.getLogDay();
   }
 
-  /** Get the initial LogDay state from the service */
+  getFoodDict(): void {
+    this.foodService.getFoodDict()
+      .subscribe(foodDict => this.foodDict = foodDict);
+  }
+
   getLogDay(): void {
     this.logDayService.getLogDay()
       .subscribe(logDay => this.logDay = logDay);
@@ -49,13 +47,11 @@ export class LogFormComponent {
   	this.newRecord();
   }
 
-
-
-  // create a new log record
   newRecord() {
     this.formLogRecord = new LogRecord(null, null, 1, new Date(Date.now()));
   }
 
+  //TODO: fix this
   // takes an "HH:MM" string and updates the hour and minute on the record's date
   setDateTime(time : number) {
   	var date : Date = new Date(this.formLogRecord.date);
@@ -64,8 +60,4 @@ export class LogFormComponent {
   	return date;
   }
 
-  //TODO: remove when we are done
-  get diagnostic() { 
-  	return JSON.stringify(this.formLogRecord);
-  }
 }

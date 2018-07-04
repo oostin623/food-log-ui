@@ -84,11 +84,10 @@
 	      </div>
 	
 	 
-	 	  <!-- button to generate a new record form to populate -->
-	 	    <!-- note we chain together template statements here -->
+	 	  <!-- generate a new record form to populate -->
 	      <button type="button" class="btn btn-default" (click)="clearFood(); foodForm.reset()">New Record</button>
 
-	 	  <!-- button to submit data for current record -->
+	 	  <!-- (button) submit data for current record -->
 	      <button type="submit" class="btn btn-success" [disabled]="!foodForm.form.valid">Submit</button>
 
 	     <!-- set food name -->
@@ -113,11 +112,27 @@
 	      <div class="col-xs-3">Calries</div>
 	      <div class="col-xs-9 pull-left">{{ entry.calories }}</div>
 	    </div>
-	    <!-- TODO: confirm this ngIf works how I think it does -->
+
 	    <div class="row" *ngIf="entry?.fat">
 	      <div class="col-xs-3">Power</div>
 	      <div class="col-xs-9 pull-left">{{ entry.fat }}</div>
 	    </div>
+
+	    <div class="row" *ngIf="entry?.carbs">
+	      <div class="col-xs-3">Power</div>
+	      <div class="col-xs-9 pull-left">{{ entry.carbs }}</div>
+	    </div>
+
+	    <div class="row" *ngIf="entry?.protein">
+	      <div class="col-xs-3">Power</div>
+	      <div class="col-xs-9 pull-left">{{ entry.protein}}</div>
+	    </div>
+
+	    <div class="row" *ngIf="entry?.servingSize && entry?.servingUnit">
+	      <div class="col-xs-3">Serving Size</div>
+	      <div class="col-xs-9 pull-left">{{ entry.servingSize + " " + entry.servingUnit }}</div>
+	    </div>
+
 	    <br>
     	<button class="btn btn-primary" (click)="submitted=false; setFoodToEdit(entry)">Edit</button>
   	</div>

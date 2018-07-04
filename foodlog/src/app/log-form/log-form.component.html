@@ -1,66 +1,17 @@
-
-diagnostic: {{diagnostic}}
-
 <div class="container" id="logFormContainer">
-    <h1>Log Form</h1>
+
+    <h1>Meal Entry</h1>
+
     <form (ngSubmit)="onSubmit()" #logForm="ngForm">
 
-      <div>
-      	<h3>Entry Date - {{formLogRecord.date | date}}</h3>
-        <h4>Entry Time - {{formLogRecord.date | date :'shortTime'}}</h4>
-      </div>
-
-       <div *ngFor="let food of mockFoods"> {{food.name}} </div>
-    	
-      <!-- <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" 
-        required
-
-        [(ngModel)]="formLogRecord.name" name="name" 
-        #name="ngModel">
-      </div>
-      
-      <div [hidden]="name.valid || name.pristine"
-        class="alert alert-danger">
-  	    Name is required
-	  </div>
- 
-      <div class="form-group">
-        <label for="calories">Calories</label>
-        <input type="number" class="form-control" id="calories"
-        required
-        [(ngModel)]="formLogRecord.calories" name="calories">
-      </div>
-
-      <div class="form-group">
-        <label for="fat">Fat</label>
-        <input type="number" class="form-control" id="fat"
-        required
-        [(ngModel)]="formLogRecord.fat" name="fat">
-      </div>
-
-      <div class="form-group">
-        <label for="carbs">Carbs</label>
-        <input type="number" class="form-control" id="carbs"
-        required
-        [(ngModel)]="formLogRecord.carbs" name="carbs">
-      </div>
-
-      <div class="form-group">
-        <label for="protein">Protein</label>
-        <input type="number" class="form-control" id="protein"
-        required
-        [(ngModel)]="formLogRecord.protein" name="protein">
-      </div>
- -->
+      <h4>{{formLogRecord.date | date}} {{formLogRecord.date | date :'shortTime'}}</h4>
 
       <div class="form-group">
         <label for="food">Food</label>
         <select class="form-control" id="food"
         required
         [(ngModel)]="formLogRecord.food" name="food">
-          <option *ngFor= "let food of mockFoods" [ngValue]="food"> 
+          <option *ngFor= "let food of foodDict" [ngValue]="food"> 
             {{food.name}}
           </option>
         </select>
