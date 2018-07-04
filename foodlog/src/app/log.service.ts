@@ -1,41 +1,29 @@
 import { Injectable} from '@angular/core';
-
-//FIXME: make this into a fancy behavior subject that returns a full array of values.
-//import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { LogRecord } from './log-record';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 
+import { LogRecord } from './log-record';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class LogService {
 
-  // Observable source
-  //private _LogDaySource = new BehaviorSubject<LogRecord[]>([]);
+  private logDayUrl = 'api/logDay';  // URL to web api
+ 
+  constructor(private http: HttpClient) { }
 
-  // Observable stream
-  //LogDay$= this._LogDaySource.asObservable();
-
-  private logDayState = new Subject<LogRecord>();
-  private logDayObservable: Observable<LogRecord>;
-
-  constructor() {
-  	this.logDayObservable = this.logDayState.asObservable();
+  /** GET logDay from server */
+  getLogDay(): Observable<LogRecord[]> {
+    return this.http.get<LogRecord[]>(this.logDayUrl);
   }
 
-  setState(state: LogRecord) {
-    this.logDayState.next(state);
+  /** POST new logRecord to the server */
+  addLogRecord(logRecord: LogRecord): Observable<LogRecord> {
+    return this.http.post<LogRecord>(this.logDayUrl, logRecord, httpOptions);
   }
 
-  getState(): Observable<any> {
-    return this.logDayObservable;
-  }
-
-
-  // service command
-  // this tells everything else the LogDay has changed.
- // changeLogDay(logday: LogRecord[]) {
-    //this._LogDaySource.next(logday);
- // }
 }

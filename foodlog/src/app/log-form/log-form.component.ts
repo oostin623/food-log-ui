@@ -11,43 +11,37 @@ import  { LogService } from '../log.service';
 })
 export class LogFormComponent {
   logDay: LogRecord[] = [];
-  formLogRecord: LogRecord = new LogRecord('String Cheese', 120, 8, 10, 5, 1, new Date(Date.now()));
+  formLogRecord: LogRecord = new LogRecord(null, 'String Cheese', 120, 8, 10, 5, 1, new Date(Date.now()));
   submitted = false;
-  logDayState: LogRecord;
-  subscription: Subscription;
 
   // inject the log service
-  constructor(private logService: LogService) { 
-      this.subscription = this.logService.getState().subscribe(
-      logDayState => {
-        console.log("log form component: the logDayState was updated with the formLogRecord: " + JSON.stringify(logDayState));
-        this.logDayState = logDayState;
-        this.logDay.push(logDayState);
-      });
+  constructor(private logService: LogService) { }
+
+  // initialize the logDay from the service
+  ngOnInit() { 
+    this.getLogDay();
   }
 
-  ngOnInit() {
-  	     this.logDayState = this.formLogRecord;
-  }
-
-  ngOnDestroy() {
-    // prevent memory leak when component is destroyed
-    this.subscription.unsubscribe();
+  /** Get the initial LogDay state from the service */
+  getLogDay(): void {
+    this.logService.getLogDay()
+      .subscribe(logDay => this.logDay = logDay);
   }
 
 
-  // form submission: 
-  // push the form record onto the logDay, update the global state, create a new record
+  /** form submission */
   onSubmit() {
   	this.submitted = true;
-  	//this.logDayState = this.formLogRecord;
-  	this.logService.setState(this.formLogRecord);
+    this.logService.addLogRecord(this.formLogRecord)
+      .subscribe(logRecord => {
+        this.logDay.push(logRecord);
+      });
   	this.newRecord();
   }
 
   // create a new log record
   newRecord() {
-    this.formLogRecord = new LogRecord('dummy name', 0, 0, 0, 0, 1, new Date(Date.now()));
+    this.formLogRecord = new LogRecord(null, 'dummy name', 0, 0, 0, 0, 1, new Date(Date.now()));
   }
 
   // takes an "HH:MM" string and updates the hour and minute on the record's date

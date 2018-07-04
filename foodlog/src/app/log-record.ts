@@ -2,6 +2,7 @@ export class LogRecord {
 
 
 	constructor(
+		public id: number,
 		public name: string,
 		public calories: number,
 		public fat: number,
