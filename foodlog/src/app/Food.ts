@@ -3,6 +3,11 @@ export class Food {
 	id: number;
 	name: string;
 	calories: number;
+	fat: number;
+	carbs: number;
+	protein: number;
+	servingUnit: string;
+	servingSize: string;
 
 	constructor (
 		id: number, 

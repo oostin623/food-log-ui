@@ -16,6 +16,7 @@ import  { FoodService } from './food.service';
 import { FoodDictComponent } from './food-dict/food-dict.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FoodDetailsPipe } from './food-details.pipe';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppComponent,
     LogFormComponent,
     FoodDictComponent,
-    DashboardComponent
+    DashboardComponent,
+    FoodDetailsPipe
   ],
   imports: [
     BrowserModule,

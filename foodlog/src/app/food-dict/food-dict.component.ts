@@ -76,7 +76,7 @@ export class FoodDictComponent {
 		this.food['carbs'] = 5;
 		this.food['protein'] = 20;
 		this.food['servingUnit'] = this.servingUnits[0];
-		this.food['servingSize'] = 1;
+		this.food['servingSize'] = '1';
 
 		/**IMPORTANT NOTE: 
 		the below will not update references like [{ngModel)] = food.name

@@ -12,7 +12,7 @@
         required
         [(ngModel)]="formLogRecord.food" name="food">
           <option *ngFor= "let food of foodDict" [ngValue]="food"> 
-            {{food.name}}
+            {{food | foodDetails:"labels"}}
           </option>
         </select>
       </div>
