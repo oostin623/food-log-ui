@@ -1,15 +1,25 @@
+<!-- Component Container -->
 <div class="container">
-	<h1>Food Dictionary Component</h1>
-	<h3>Current Food Model: {{food | json}}</h3>
+
+	<!-- Header Bar -->
+	<div>
+		<h1>Food Dictionary</h1>
+<!-- 		<h3>Current Food Model: {{food | json}}</h3> -->
+	</div>
 
 <!-- FormsModule is being used implicity for this form
         this is implicitly added to the form tag, 
         giving us a FormControl registered to the 
         name attribute defined below. -->
 
+	<!-- ADD FOOD MODAL -->
+	<div>
+	</div>
+	
 	<form (ngSubmit)="onSubmit()" #foodForm="ngForm">
 
 		<!-- insert dummy food -->
+		
 		  <button type="button" class="btn btn-default" (click)="populateTestFood()">
 		   	Populate Test Food</button>
 
