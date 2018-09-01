@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import { LogRecord } from '../log-record';
-import { LogDayService } from '../logDay.service';
+import { LogRecord } from '../model/log-record';
+import { LogDayService } from '../services/logDay.service';
  
 @Component({
   selector: 'app-dashboard',

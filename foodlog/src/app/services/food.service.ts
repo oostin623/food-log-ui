@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Food } from './Food';
+import { Food } from '../model/Food';
 
 
 const httpOptions = {

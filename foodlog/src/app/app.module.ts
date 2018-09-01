@@ -5,18 +5,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 //basic persistence for the service
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data-service';
+import { InMemoryDataService }  from './services/in-memory-data-service';
 
 import { AppComponent } from './app.component';
 import { LogFormComponent } from './log-form/log-form.component';
 
-import  { LogDayService } from './logDay.service';
-import  { FoodService } from './food.service';
+import  { LogDayService } from './services/logDay.service';
+import  { FoodService } from './services/food.service';
 
 import { FoodDictComponent } from './food-dict/food-dict.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './routing/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { FoodDetailsPipe } from './food-details.pipe';
+import { FoodDetailsPipe } from './pipes/food-details.pipe';
 
 
 @NgModule({

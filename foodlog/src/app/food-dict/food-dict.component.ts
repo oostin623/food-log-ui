@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import { Food } from '../Food';
-import { FoodService } from '../food.service';
+import { Food } from '../model/Food';
+import { FoodService } from '../services/food.service';
 
 @Component({
   selector: 'app-food-dict',
@@ -9,9 +9,10 @@ import { FoodService } from '../food.service';
   styleUrls: ['./food-dict.component.css']
 })
 export class FoodDictComponent {
+
 	foodDict: Food[] = [];
 
-	//possible serving units for the drop down
+	// possible serving units for the drop down
 	servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
 
 	food: Food;
@@ -23,7 +24,7 @@ export class FoodDictComponent {
 	  this.resetFoodModel();
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.getFoodDict();
   }
 
@@ -37,8 +38,8 @@ export class FoodDictComponent {
 		this.editingExistingFood = false;
 	}
 
-	onSubmit() {		
-	  //maintain the id if editing an existing food
+	onSubmit() {
+	  // maintain the id if editing an existing food
 	  this.foodService.addFood(this.food)
       .subscribe(food => {
         this.foodDict.push(food);
@@ -78,7 +79,7 @@ export class FoodDictComponent {
 		this.food['servingUnit'] = this.servingUnits[0];
 		this.food['servingSize'] = '1';
 
-		/**IMPORTANT NOTE: 
+		/**IMPORTANT NOTE:
 		the below will not update references like [{ngModel)] = food.name
 		we would need to bind to food itself for setting a whole new object to work;
 		this is why we do it like above instead
@@ -88,7 +89,7 @@ export class FoodDictComponent {
 		**/
 	}
 
-	//added to confirm that ngModel will in fact update when the component changes a value
+	// added to confirm that ngModel will in fact update when the component changes a value
 	// test results: it does in fact update.
 	setTheCurrentFoodName() {
 		this.food['name'] = 'testing reset of food name';

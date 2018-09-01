@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import { Food } from '../Food';
-import { LogRecord } from '../log-record';
-import  { LogDayService } from '../logDay.service';
-import { FoodService } from '../food.service';
+import { Food } from '../model/Food';
+import { LogRecord } from '../model/log-record';
+import  { LogDayService } from '../services/logDay.service';
+import { FoodService } from '../services/food.service';
 
 @Component({
   selector: 'app-log-form',

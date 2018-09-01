@@ -1,6 +1,6 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Food } from './Food';
-import { LogRecord } from './log-record';
+import { Food } from '../model/Food';
+import { LogRecord } from '../model/log-record';
 
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
