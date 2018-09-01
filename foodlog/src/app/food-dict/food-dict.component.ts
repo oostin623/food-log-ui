@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
-import { Food } from '../model/Food';
+/* import {Subscription} from 'rxjs/Subscription';
+ */import { Food } from '../model/Food';
 import { FoodService } from '../services/food.service';
+
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-dialog.component';
 
 @Component({
   selector: 'app-food-dict',
   templateUrl: './food-dict.component.html',
   styleUrls: ['./food-dict.component.css']
 })
-export class FoodDictComponent {
+export class FoodDictComponent implements OnInit{
 
-	foodDict: Food[] = [];
+  foodDict: Food[] = [];
 
 	// possible serving units for the drop down
 	servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
@@ -20,13 +23,19 @@ export class FoodDictComponent {
 	showList = false;
 	editingExistingFood = false;
 
-  constructor(private foodService: FoodService) {
-	  this.resetFoodModel();
-  }
+	foodDialogRef: MatDialogRef<AddFoodDialogComponent>;
+
+	constructor(private foodService: FoodService
+							private dialog: MatDialog) { }
 
   ngOnInit() {
+		this.resetFoodModel();
     this.getFoodDict();
-  }
+	}
+	
+	openAddFoodDialog() {
+		this.foodDialogRef = this.dialog.open(AddFoodDialogComponent);
+	}
 
   getFoodDict(): void {
     this.foodService.getFoodDict()

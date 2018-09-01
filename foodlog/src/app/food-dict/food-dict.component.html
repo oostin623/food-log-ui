@@ -12,8 +12,9 @@
         giving us a FormControl registered to the 
         name attribute defined below. -->
 
-	<!-- ADD FOOD MODAL -->
+	<!-- ADD FOOD DIALOG -->
 	<div>
+		<button (click)="openAddFoodDialog()">Add Food</button>
 	</div>
 	
 	<form (ngSubmit)="onSubmit()" #foodForm="ngForm">

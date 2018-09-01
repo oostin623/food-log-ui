@@ -9,6 +9,7 @@ import { InMemoryDataService } from './services/in-memory-data-service';
 
 // ng material
 import { MatDialogModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // foodlog features
 import { AppComponent } from './app.component';
@@ -19,19 +20,21 @@ import { FoodDictComponent } from './food-dict/food-dict.component';
 import { AppRoutingModule } from './routing/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FoodDetailsPipe } from './pipes/food-details.pipe';
-/* import { AddFoodDialogComponent } from './pipes/food-dict/add-food-dialog/add-food-dialog.component';
- */
+import { AddFoodDialogComponent } from './food-dict/add-food-dialog/add-food-dialog.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LogFormComponent,
     FoodDictComponent,
     DashboardComponent,
-    FoodDetailsPipe
+    FoodDetailsPipe,
+    AddFoodDialogComponent
   ],
   imports: [
     BrowserModule,
     MatDialogModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -43,7 +46,8 @@ import { FoodDetailsPipe } from './pipes/food-details.pipe';
     )
   ],
   providers: [LogDayService, FoodService],
-  bootstrap: [AppComponent]/*,
-   entryConponents: [AddFoodDialogComponent],
- */})
+  bootstrap: [AppComponent],
+  // dynamically generated dialogs, etc. from angular material
+  entryComponents: [AddFoodDialogComponent],
+})
 export class AppModule { }
