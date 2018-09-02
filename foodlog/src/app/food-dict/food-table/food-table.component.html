@@ -1,47 +1,49 @@
 <div>
 
-  <!-- food DICT TABLE -->
+  <!-- FOOD DICT TABLE -->
   <h2>Avalible foods:</h2>
-  
+
   <div *ngFor="let food of foodDict">
-    <div class="row">
-      <div class="col-xs-3">Id</div>
-      <div class="col-xs-9  pull-left">{{ food.id }}</div>
-    </div>
-    <!-- NAME -->
-    <div class="row">
-      <div class="col-xs-3">Name</div>
-      <div class="col-xs-9  pull-left">{{ food.name }}</div>
-    </div>
-    <!-- CALORIES -->
-    <div class="row">
-      <div class="col-xs-3">Calries</div>
-      <div class="col-xs-9 pull-left">{{ food.calories }}</div>
-    </div>
-    <!-- FAT -->
-    <div class="row" *ngIf="food?.fat">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ food.fat }}</div>
-    </div>
-    <!-- CARBS -->
-    <div class="row" *ngIf="food?.carbs">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ food.carbs }}</div>
-    </div>
-    <!-- PROTEIN -->
-    <div class="row" *ngIf="food?.protein">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ food.protein}}</div>
-    </div>
-    <!-- SERVING SIZE -->
-    <div class="row" *ngIf="food?.servingSize && food?.servingUnit">
-      <div class="col-xs-3">Serving Size</div>
-      <div class="col-xs-9 pull-left">{{ food.servingSize + " " + food.servingUnit }}</div>
+    <div *ngIf="food">
+      <div class="row">
+        <div class="col-xs-3">Id</div>
+        <div class="col-xs-9  pull-left">{{ food.id }}</div>
+      </div>
+      <!-- NAME -->
+      <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9  pull-left">{{ food.name }}</div>
+      </div>
+      <!-- CALORIES -->
+      <div class="row">
+        <div class="col-xs-3">Calries</div>
+        <div class="col-xs-9 pull-left">{{ food.calories }}</div>
+      </div>
+      <!-- FAT -->
+      <div class="row" *ngIf="food?.fat">
+        <div class="col-xs-3">Power</div>
+        <div class="col-xs-9 pull-left">{{ food.fat }}</div>
+      </div>
+      <!-- CARBS -->
+      <div class="row" *ngIf="food?.carbs">
+        <div class="col-xs-3">Power</div>
+        <div class="col-xs-9 pull-left">{{ food.carbs }}</div>
+      </div>
+      <!-- PROTEIN -->
+      <div class="row" *ngIf="food?.protein">
+        <div class="col-xs-3">Power</div>
+        <div class="col-xs-9 pull-left">{{ food.protein}}</div>
+      </div>
+      <!-- SERVING SIZE -->
+      <div class="row" *ngIf="food?.servingSize && food?.servingUnit">
+        <div class="col-xs-3">Serving Size</div>
+        <div class="col-xs-9 pull-left">{{ food.servingSize + " " + food.servingUnit }}</div>
+      </div>
+
+      <!-- EDIT BUTTON -->
+      <br>
+      <button (click)="setFoodToEdit(food)">Edit</button>
     </div>
 
-    <!-- EDIT BUTTON -->
-    <br>
-    <button (click)="setFoodToEdit(food)">Edit</button>
-    
 
   </div>

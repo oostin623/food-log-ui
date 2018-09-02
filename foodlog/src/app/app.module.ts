@@ -23,6 +23,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FoodDetailsPipe } from './pipes/food-details.pipe';
 import { AddFoodDialogComponent } from './food-dict/add-food-dialog/add-food-dialog.component';
 import { FoodTableComponent } from './food-dict/food-table/food-table.component';
+import { FoodFormComponent } from './food-dict/food-form/food-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { FoodTableComponent } from './food-dict/food-table/food-table.component'
     DashboardComponent,
     FoodDetailsPipe,
     AddFoodDialogComponent,
-    FoodTableComponent
+    FoodTableComponent,
+    FoodFormComponent
   ],
   imports: [
     // BrowserModule must import before Material stuff

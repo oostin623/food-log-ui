@@ -13,8 +13,8 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     const foods = [
-      new Food(10, 'apple (medium)', 100),
-      new Food(10, 'derp', 100, 2)
+      new Food(10, 'apple (medium)', 100, 20, 5, 10, '10 oz'),
+      new Food(10, 'derp', 100, 20, 5, 10, '8 oz')
     ];
 
     return {logDay, foods};

@@ -1,84 +1,41 @@
 <div class="container">
-  
+
   <div>
     <h1>Food Dictionary</h1>
   </div>
 
   <!-- ADD FOOD DIALOG BUTTON -->
-  <div>
-    <button (click)="openAddFoodDialog()">Add Food</button>
+  <!-- <div>
+    <button (click)="openAddFoodDialog()">
+      Add Food
+    </button>
   </div>
+  <br> -->
 
-  <form (ngSubmit)="onSubmit()" #foodForm="ngForm">
-
-    <!-- POPULATE TEST FOOD BUTTON -->
+  <!-- POPULATE TEST FOOD BUTTON -->
+  <div>
     <button type="button" class="btn btn-default" (click)="populateTestFood()">
-      Populate Test Food</button>
+      Populate Test Food
+    </button>
+  </div>
+  <br>
 
-    <!-- NAME -->
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="food.name" name="name" #name="ngModel">
-      <!-- used to display the pop up below -->
-    </div>
-    <!--pop up warning if name missing -->
-    <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-      Name is required
-    </div>
-    <!-- CALORIES -->
-    <div class="form-group">
-      <label for="calories">Calories</label>
-      <input type="number" class="form-control" id="calories" required [(ngModel)]="food.calories" name="calories" #calories="ngModel">
-    </div>
-    <!--pop up warning if calories are missing -->
-    <div [hidden]="calories.valid || calories.pristine" class="alert alert-danger">
-      Calories are required
-    </div>
-    <!-- FAT -->
-    <div class="form-group">
-      <label for="fat">Fat</label>
-      <input type="number" class="form-control" id="fat" required [(ngModel)]="food.fat" name="fat">
-    </div>
-    <!-- CARBS -->
-    <div class="form-group">
-      <label for="carbs">Carbs</label>
-      <input type="number" class="form-control" id="carbs" required [(ngModel)]="food.carbs" name="carbs">
-    </div>
-    <!-- PROTEIN -->
-    <div class="form-group">
-      <label for="protein">Protein</label>
-      <input type="number" class="form-control" id="protein" required [(ngModel)]="food.protein" name="protein">
-    </div>
-    <!-- SERVINGS UNIT -->
-    <div class="form-group">
-      <label for="servingUnit">Serving Unit</label>
-      <select class="form-control" id="servingUnit" required [(ngModel)]="food.servingUnit" name="serving unit">
-        <option *ngFor="let unit of servingUnits" [value]="unit"> {{unit}}</option>
-      </select>
-    </div>
-    <!-- SERVINGS AMOUNT -->
-    <div class="form-group">
-      <label for="servings">Serving Size</label>
-      <input type="number" class="form-control" id="serving size" required [(ngModel)]="food.servingSize" name="serving size">
-    </div>
-
-    <!-- SUBMIT FOOD FORM -->
-    <button type="submit" class="btn btn-success" [disabled]="!foodForm.form.valid">Submit</button>
-
-  </form>
+  <app-food-form *ngIf="!submitted"
+    [editableFood]="food"
+    (food)="onSubmitFood($event)">
+  </app-food-form>
 
   <!-- IMPORTANT: data sharing must be inside the component tag for async data!!! -->
-  <!-- FIXME: figure out how to get output events working without exact name matches. 
-              this only works if everything is called "food", 
-              chaing all to "editFood" except this binding breaks it -->
-  <app-food-table 
-    [foodDict]="foodDict"
-    (food)="onFood($event)">   
+  <!-- NOTE: the handler method can have a descriptive name, 
+             but the variable being emitted must be 'food' -->
+  <app-food-table
+    [foodDict]="foodDict" 
+    (food)="onSelectFood($event)">
   </app-food-table>
 
 
   <!-- MATERIAL TABLE -->
-<!--   <table cdk-table [foodDict]="foodDict">
+  <!--   <table cdk-table [foodDict]="foodDict">
     <ng-container cdkColumnDef="name">
       <th cdk-header-cell *cdkHeaderCellDef> Name </th>
       <td cdk-cell *cdkCellDef="let element"> {{food.name}} </td>

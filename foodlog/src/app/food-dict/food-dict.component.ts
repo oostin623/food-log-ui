@@ -11,15 +11,18 @@ import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-di
 })
 export class FoodDictComponent implements OnInit {
 
-  servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
-
-  submitted = false;
-  editingExistingFood = false;
-
   foodDialogRef: MatDialogRef<AddFoodDialogComponent>;
 
+
+  // form displays when not submitted
+  submitted = false;
+  // default to having form open to add a new food
+  editingExistingFood = false;
+
+  servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
+
   foodDict: Food[] = [];
-  food: Food = new Food(0, '', 0, 0, 0, 0, '');
+  food: Food = new Food(1, 'test food', 100, 10, 5, 20, this.servingUnits[0], 1);
 
   constructor(private foodService: FoodService,
               private dialog: MatDialog) { }
@@ -29,29 +32,26 @@ export class FoodDictComponent implements OnInit {
       .subscribe(data => this.foodDict = data);
   }
 
-  onFood(food: Food) {
+  onSelectFood(food: Food) {
     console.log('parent: selected food: ', food.name);
     this.food = food;
     this.editingExistingFood = true;
   }
 
+  onSubmitFood(food: Food) {
+    if (this.editingExistingFood) {
+      console.log('parent: Submitted edits to food: ', food.name);
+    } else {
+      console.log('parent: Submitted new food: ', food.name);
+    }
+    // TODO: account for updating an existing food here
+    this.foodService.addFoodtoDict(food);
+    this.food = null;
+    this.editingExistingFood = false;
+  }
+
   openAddFoodDialog() {
     this.foodDialogRef = this.dialog.open(AddFoodDialogComponent);
-  }
-
-  onSubmit() {
-    // maintain the id if editing an existing food
-    this.foodService.addFoodtoDict(this.food);
-    this.submitted = true;
-  }
-
-  setFoodToEdit(food: Food) {
-    this.setFoodModel(food);
-    this.editingExistingFood = true;
-  }
-
-  setFoodModel(food: Food) {
-    this.food = food;
   }
 
   populateTestFood() {
@@ -70,5 +70,5 @@ export class FoodDictComponent implements OnInit {
     this is why we do it like above instead
     below is bad garbo:
     this.food = new Food(this.foodCount, 'test food', 100, 10, 5, 20, this.servingUnits[0], 1);*/
- }
+  }
 }
