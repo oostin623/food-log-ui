@@ -1,11 +1,11 @@
-<div class="container" id="logFormContainer">
+<div class="container">
 
-    <h1>Meal Entry</h1>
+    <h1>Add Meal</h1>
 
+    <!-- MEAL FORM -->
     <form (ngSubmit)="onSubmit()" #logForm="ngForm">
 
-      <h4>{{formLogRecord.date | date}} {{formLogRecord.date | date :'shortTime'}}</h4>
-
+      <!-- food drop down -->
       <div class="form-group">
         <label for="food">Food</label>
         <select class="form-control" id="food"
@@ -16,24 +16,19 @@
           </option>
         </select>
       </div>
-
+      <!-- servings -->
       <div class="form-group">
         <label for="servings">Servings</label>
         <input type="number" class="form-control" id="servings"
         required
         [(ngModel)]="formLogRecord.servings" name="servings">
       </div>
-      <!-- using the chrome time tag for valid input -->
+      <!-- time eaten -->
       <div class="form-group">
         <label for="time">Time Consumed</label>
-        <input type="time" class="form-control" id="time"
-         [ngModel]="formLogRecord.date" 
-         (ngModelChange)="formLogRecord.date = setDateTime($event)"
-         name="time">
+        <input type="text" class="form-control" id="time"
+         [(ngModel)]="formLogRecord.date" name="time">
       </div>
- 
- 	  <!-- button to generate a new record form to populate -->
-      <button type="button" class="btn btn-default" (click)="newRecord(); logForm.reset()">New Record</button>
 
  	  <!-- button to submit data for current record -->
       <button type="submit" class="btn btn-success" [disabled]="!logForm.form.valid">Submit</button>
@@ -41,7 +36,6 @@
 </div>
 
 <!-- LOG TABLE -->
-
 <div class="container" [hidden]="!submitted">
 
   <h2>You submitted the following Log Record:</h2>
@@ -57,7 +51,7 @@
 	</tr>
   <!-- repeated table data -->
   <tr *ngFor="let record of logDay">
-  		<td>{{ record.date | date :'shortTime'}}</td>
+  		<td>{{ record.date }}</td>
   		<td>{{ record.food.name }}</td>
       <td>{{ record.food.calories }}</td>
   		<td>{{ record.servings }}</td>

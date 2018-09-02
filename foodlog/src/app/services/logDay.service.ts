@@ -1,8 +1,8 @@
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
-
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { tap } from 'rxjs/operators';
 import { LogRecord } from '../model/log-record';
 
 const httpOptions = {
@@ -12,18 +12,28 @@ const httpOptions = {
 @Injectable()
 export class LogDayService {
 
-  private logDayUrl = 'api/logDay';  // URL to web api
- 
+  private logDayUrl = 'api/logDay';
+  private logDaySource: BehaviorSubject<LogRecord[]> = new BehaviorSubject<LogRecord[]>([]);
+  private LogDay$: Observable<LogRecord[]> = this.logDaySource.asObservable();
+
   constructor(private http: HttpClient) { }
 
-  /** GET logDay from server */
-  getLogDay(): Observable<LogRecord[]> {
-    return this.http.get<LogRecord[]>(this.logDayUrl);
+  private loadLogDay() {
+    this.http.get<LogRecord[]>(this.logDayUrl)
+      .pipe(
+        tap(data => console.log(data)),
+      )
+      .subscribe(
+        data => this.logDaySource.next(data));
   }
 
-  /** POST new logRecord to the server */
-  addLogRecord(logRecord: LogRecord): Observable<LogRecord> {
-    return this.http.post<LogRecord>(this.logDayUrl, logRecord, httpOptions);
+  public getLogDay(): Observable<LogRecord[]> {
+    return this.LogDay$;
   }
 
+  public addRecord(logRecord: LogRecord) {
+    this.http.post<LogRecord>(this.logDayUrl, logRecord, httpOptions)
+      .subscribe(
+        data => this.logDaySource.next(this.logDaySource.value.concat(data)));
+  }
 }

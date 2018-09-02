@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs/Subscription';
 import { Food } from '../model/food';
 import { LogRecord } from '../model/log-record';
 import { LogDayService } from '../services/logDay.service';
@@ -23,27 +22,15 @@ export class LogFormComponent implements OnInit {
 
   /** initial subscription to the shared services */
   ngOnInit() {
-    this.getFoodDict();
-    this.getLogDay();
-  }
-
-  getFoodDict(): void {
     this.foodService.getFoodDict()
-      .subscribe(foodDict => this.foodDict = foodDict);
-  }
-
-  getLogDay(): void {
+      .subscribe(data => this.foodDict = data);
     this.logDayService.getLogDay()
-      .subscribe(logDay => this.logDay = logDay);
+      .subscribe(data => this.logDay = data);
   }
 
-  /** form submission */
   onSubmit() {
     this.submitted = true;
-    this.logDayService.addLogRecord(this.formLogRecord)
-      .subscribe(logRecord => {
-        this.logDay.push(logRecord);
-      });
+    this.logDayService.addRecord(this.formLogRecord);
     this.newRecord();
   }
 

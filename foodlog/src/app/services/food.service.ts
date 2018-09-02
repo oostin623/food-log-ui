@@ -2,7 +2,6 @@
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { pipe } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { tap } from 'rxjs/operators';
 import { Food } from '../model/food';
@@ -25,7 +24,7 @@ export class FoodService {
   private loadFoodDict() {
     this.http.get<Food[]>(this.foodDictUrl)
     .pipe(
-      tap(data => console.log(data[1].name)),
+      tap(data => console.log(data)),
     )
     .subscribe(
       data => this.foodDictSource.next(data));

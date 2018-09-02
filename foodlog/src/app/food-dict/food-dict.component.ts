@@ -26,9 +26,9 @@ export class FoodDictComponent implements OnInit {
 
   ngOnInit() {
     this.foodService.getFoodDict()
-    .subscribe(data => this.foodDict = data);
+      .subscribe(data => this.foodDict = data);
   }
-  
+
   openAddFoodDialog() {
     this.foodDialogRef = this.dialog.open(AddFoodDialogComponent);
   }
@@ -57,7 +57,7 @@ export class FoodDictComponent implements OnInit {
     this.food['carbs'] = 5;
     this.food['protein'] = 20;
     this.food['servingUnit'] = this.servingUnits[0];
-    this.food['servingSize'] = '1';
+    this.food['servingSize'] = 1;
 
     /**IMPORTANT NOTE:
     the below will not update references like [{ngModel)] = food.name
