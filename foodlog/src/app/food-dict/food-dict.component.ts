@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-/* import {Subscription} from 'rxjs/Subscription';
- */import { Food } from '../model/Food';
+import { Food } from '../model/Food';
 import { FoodService } from '../services/food.service';
-
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-dialog.component';
 
@@ -13,8 +11,9 @@ import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-di
 })
 export class FoodDictComponent implements OnInit{
 
-  foodDict: Food[] = [];
-
+	foodDict: Food[] = [];
+	
+	// todo: move to food model
 	// possible serving units for the drop down
 	servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
 
