@@ -24,7 +24,7 @@ export class FoodService {
   private loadFoodDict() {
     this.http.get<Food[]>(this.foodDictUrl)
     .pipe(
-      tap(data => console.log(data)),
+      tap(data => console.log('loaded foods: ', data)),
     )
     .subscribe(
       data => this.foodDictSource.next(data));
@@ -34,12 +34,20 @@ export class FoodService {
     return this.foodDict$;
   }
 
-  public addFoodtoDict(food: Food) {
+  public addFoodToDict(food: Food) {
     this.http.post<Food>(this.foodDictUrl, food, httpOptions)
     .pipe(
-      tap(data => console.log(data)),
+      tap(data => console.log('added food: ', data)),
     )
     .subscribe(
       data => this.foodDictSource.next(this.foodDictSource.value.concat(data)));
+  }
+
+  public editExistingFood(food: Food) {
+    this.http.put<Food>(this.foodDictUrl, food, httpOptions)
+      .pipe(
+        tap(data => console.log('updated food: ', food, 'response: ', data)),
+      )
+      .subscribe();
   }
 }

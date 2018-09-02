@@ -5,7 +5,15 @@
 
     <!-- ADD FOOD FORM -->
     <form (ngSubmit)="onSubmit()" #editableFoodForm="ngForm">
-      <h2>Add New Food</h2>
+      <h2>{{ (editableFood?.id ) 
+        ? 'Editing Exisiting Food with id: ' + editableFood.id 
+        : 'Add New Food' }}
+      </h2>
+
+      <!-- id -->
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="id" required [(ngModel)]="editableFood.id" name="id">
+      </div>
 
       <!-- name -->
       <div class="form-group">
@@ -29,29 +37,34 @@
       <!-- fat -->
       <div class="form-group">
         <label for="fat">Fat</label>
-        <input type="number" class="form-control" id="fat" required [(ngModel)]="editableFood.fat" name="fat">
+        <input type="number" class="form-control" id="fat" required 
+        [(ngModel)]="editableFood.fat" name="fat">
       </div>
       <!-- carbs -->
       <div class="form-group">
         <label for="carbs">Carbs</label>
-        <input type="number" class="form-control" id="carbs" required [(ngModel)]="editableFood.carbs" name="carbs">
+        <input type="number" class="form-control" id="carbs" required 
+        [(ngModel)]="editableFood.carbs" name="carbs">
       </div>
       <!-- protein -->
       <div class="form-group">
         <label for="protein">Protein</label>
-        <input type="number" class="form-control" id="protein" required [(ngModel)]="editableFood.protein" name="protein">
+        <input type="number" class="form-control" id="protein" required 
+        [(ngModel)]="editableFood.protein" name="protein">
       </div>
       <!-- unit (servings) -->
       <div class="form-group">
         <label for="servingUnit">Serving Unit</label>
-        <select class="form-control" id="servingUnit" required [(ngModel)]="editableFood.servingUnit" name="serving unit">
-          <option *ngFor="let unit of servingUnits" [value]="unit"> {{unit}}</option>
+        <select class="form-control" id="servingUnit" required 
+        [(ngModel)]="editableFood.servingUnit" name="serving unit">
+          <option *ngFor="let unit of getServingUnits()">{{unit}}</option>
         </select>
       </div>
       <!-- amount (servings) -->
       <div class="form-group">
         <label for="servings">Serving Size</label>
-        <input type="number" class="form-control" id="serving size" required [(ngModel)]="editableFood.servingSize" name="serving size">
+        <input type="number" class="form-control" id="serving size" required 
+        [(ngModel)]="editableFood.servingSize" name="serving size">
       </div>
       <br>
 
@@ -61,7 +74,7 @@
           Submit
         </button>
       </div>
-      
+
     </form>
   </div>
 
