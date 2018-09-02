@@ -19,7 +19,7 @@ export class FoodDictComponent implements OnInit {
   foodDialogRef: MatDialogRef<AddFoodDialogComponent>;
 
   foodDict: Food[] = [];
-  food: Food = new Food(10, 'apple', 100, 20, 5, 10, '10 oz');
+  food: Food = new Food(0, '', 0, 0, 0, 0, '');
 
   constructor(private foodService: FoodService,
               private dialog: MatDialog) { }
@@ -27,6 +27,12 @@ export class FoodDictComponent implements OnInit {
   ngOnInit() {
     this.foodService.getFoodDict()
       .subscribe(data => this.foodDict = data);
+  }
+
+  onFood(food: Food) {
+    console.log('parent: selected food: ', food.name);
+    this.food = food;
+    this.editingExistingFood = true;
   }
 
   openAddFoodDialog() {
@@ -49,7 +55,6 @@ export class FoodDictComponent implements OnInit {
   }
 
   populateTestFood() {
-    // this.food = new Food(10, 'apple', 100, 20, 5, 10, '10 oz');
     this.food['id'] = 1;
     this.food['name'] = 'test food';
     this.food['calories'] = 100;
@@ -59,13 +64,11 @@ export class FoodDictComponent implements OnInit {
     this.food['servingUnit'] = this.servingUnits[0];
     this.food['servingSize'] = 1;
 
-    /**IMPORTANT NOTE:
+    /* IMPORTANT NOTE:
     the below will not update references like [{ngModel)] = food.name
     we would need to bind to food itself for setting a whole new object to work;
     this is why we do it like above instead
     below is bad garbo:
-
-    this.food = new Food(this.foodCount, 'test food', 100, 10, 5, 20, this.servingUnits[0], 1);
-    **/
+    this.food = new Food(this.foodCount, 'test food', 100, 10, 5, 20, this.servingUnits[0], 1);*/
  }
 }

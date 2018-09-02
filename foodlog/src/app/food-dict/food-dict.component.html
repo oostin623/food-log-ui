@@ -67,47 +67,28 @@
 
   </form>
 
-  <!-- FOOD DICT TABLE -->
-  <h2>Avalible Foods:</h2>
-  <div *ngFor="let entry of foodDict">
-    <div class="row">
-      <div class="col-xs-3">Id</div>
-      <div class="col-xs-9  pull-left">{{ entry.id }}</div>
-    </div>
-    <!-- NAME -->
-    <div class="row">
-      <div class="col-xs-3">Name</div>
-      <div class="col-xs-9  pull-left">{{ entry.name }}</div>
-    </div>
-    <!-- CALORIES -->
-    <div class="row">
-      <div class="col-xs-3">Calries</div>
-      <div class="col-xs-9 pull-left">{{ entry.calories }}</div>
-    </div>
-    <!-- FAT -->
-    <div class="row" *ngIf="entry?.fat">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ entry.fat }}</div>
-    </div>
-    <!-- CARBS -->
-    <div class="row" *ngIf="entry?.carbs">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ entry.carbs }}</div>
-    </div>
-    <!-- PROTEIN -->
-    <div class="row" *ngIf="entry?.protein">
-      <div class="col-xs-3">Power</div>
-      <div class="col-xs-9 pull-left">{{ entry.protein}}</div>
-    </div>
-    <!-- SERVING SIZE -->
-    <div class="row" *ngIf="entry?.servingSize && entry?.servingUnit">
-      <div class="col-xs-3">Serving Size</div>
-      <div class="col-xs-9 pull-left">{{ entry.servingSize + " " + entry.servingUnit }}</div>
-    </div>
+  <!-- IMPORTANT: data sharing must be inside the component tag for async data!!! -->
+  <!-- FIXME: figure out how to get output events working without exact name matches. 
+              this only works if everything is called "food", 
+              chaing all to "editFood" except this binding breaks it -->
+  <app-food-table 
+    [foodDict]="foodDict"
+    (food)="onFood($event)">   
+  </app-food-table>
 
-    <!-- EDIT BUTTON -->
-    <br>
-    <button class="btn btn-primary" (click)="submitted=false; setFoodToEdit(entry)">Edit</button>
-  </div>
+
+  <!-- MATERIAL TABLE -->
+<!--   <table cdk-table [foodDict]="foodDict">
+    <ng-container cdkColumnDef="name">
+      <th cdk-header-cell *cdkHeaderCellDef> Name </th>
+      <td cdk-cell *cdkCellDef="let element"> {{food.name}} </td>
+    </ng-container>
+    <ng-container cdkColumnDef="calories">
+      <th cdk-header-cell *cdkHeaderCellDef> Calories </th>
+      <td cdk-cell *cdkCellDef="let element"> {{food.calories}} </td>
+    </ng-container>
+    <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+    <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+  </table> -->
 
 </div>

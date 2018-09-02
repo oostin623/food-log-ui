@@ -33,6 +33,9 @@ export class LogDayService {
 
   public addRecord(logRecord: LogRecord) {
     this.http.post<LogRecord>(this.logDayUrl, logRecord, httpOptions)
+      .pipe(
+        tap(data => console.log(data)),
+      )
       .subscribe(
         data => this.logDaySource.next(this.logDaySource.value.concat(data)));
   }

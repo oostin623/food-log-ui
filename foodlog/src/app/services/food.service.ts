@@ -36,6 +36,9 @@ export class FoodService {
 
   public addFoodtoDict(food: Food) {
     this.http.post<Food>(this.foodDictUrl, food, httpOptions)
+    .pipe(
+      tap(data => console.log(data)),
+    )
     .subscribe(
       data => this.foodDictSource.next(this.foodDictSource.value.concat(data)));
   }
