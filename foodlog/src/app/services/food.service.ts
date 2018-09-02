@@ -1,11 +1,11 @@
 
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable } from 'rxjs/Observable';
-
-import { Food } from '../model/Food';
-
+import { pipe } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { tap } from 'rxjs/operators';
+import { Food } from '../model/food';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,18 +14,30 @@ const httpOptions = {
 @Injectable()
 export class FoodService {
 
-  private foodDictUrl = 'api/foods';  // URL to web api
- 
-  constructor(private http: HttpClient) { }
+  private foodDictUrl = 'api/foods';
+  private foodDictSource: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
+  private foodDict$: Observable<Food[]> = this.foodDictSource.asObservable();
 
-  /** GET foodDict from server */
-  getFoodDict(): Observable<Food[]> {
-    return this.http.get<Food[]>(this.foodDictUrl);
+  constructor(private http: HttpClient) {
+    this.loadFoodDict();
   }
 
-  /** POST new Food to the server */
-  addFood(food: Food): Observable<Food> {
-    return this.http.post<Food>(this.foodDictUrl, food, httpOptions);
+  private loadFoodDict() {
+    this.http.get<Food[]>(this.foodDictUrl)
+    .pipe(
+      tap(data => console.log(data[1].name)),
+    )
+    .subscribe(
+      data => this.foodDictSource.next(data));
   }
 
+  public getFoodDict(): Observable<Food[]> {
+    return this.foodDict$;
+  }
+
+  public addFoodtoDict(food: Food) {
+    this.http.post<Food>(this.foodDictUrl, food, httpOptions)
+    .subscribe(
+      data => this.foodDictSource.next(this.foodDictSource.value.concat(data)));
+  }
 }

@@ -1,14 +1,13 @@
-import { Food } from './Food';
+import { Food } from './food';
 
 export class LogRecord {
 
-
-	constructor(
-		public id: number,
-		public food: Food,
-		public servings: number,
-		public date: Date,
-		public notes?: Text,
-		){ }
+  constructor(
+    public id: number,
+    public food: Food,
+    public servings: number,
+    public date: string,
+    public notes?: string,
+    ) { }
 }
 
