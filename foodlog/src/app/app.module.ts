@@ -10,6 +10,7 @@ import { InMemoryDataService } from './services/in-memory-data-service';
 // ng material
 import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
 // foodlog features
 import { AppComponent } from './app.component';
@@ -32,8 +33,11 @@ import { AddFoodDialogComponent } from './food-dict/add-food-dialog/add-food-dia
     AddFoodDialogComponent
   ],
   imports: [
+    // BrowserModule must import before Material stuff
     BrowserModule,
     MatDialogModule,
+    MatButtonModule,
+    MatCheckboxModule,
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
