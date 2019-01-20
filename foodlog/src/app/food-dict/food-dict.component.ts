@@ -9,50 +9,55 @@ import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-di
   templateUrl: './food-dict.component.html',
   styleUrls: ['./food-dict.component.css']
 })
+/**
+ * Food Dict
+ */
 export class FoodDictComponent implements OnInit {
 
-  foodDialogRef: MatDialogRef<AddFoodDialogComponent>;
-
+  addFoodDialogRef: MatDialogRef<AddFoodDialogComponent>;
   submitted = false;
-
-  // true => call update(), else => call add()
-  editingExistingFood = false;
-
+  edit = false; // true when form is in "edit mode"
   servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
-
   foodDict: Food[] = [];
   food: Food;
 
+  /* wire required bits */
   constructor(private foodService: FoodService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {}
 
+  /* initialize component */
   ngOnInit() {
     this.foodService.getFoodDict()
       .subscribe(data => this.foodDict = data);
   }
 
+  /* ::: USER ACTIONS ::: */
+
+  /* food selected for view/edit */
   onSelectFood(food: Food) {
     console.log('food-dict: selected food: ', food.name);
     this.food = food;
-    this.editingExistingFood = true;
+    this.edit = true;
   }
 
+  /* food entry added or changed */
   onSubmitFood(food: Food) {
-    if (this.editingExistingFood) {
-      console.log('food-dict: Submitted edits to food: ', food.name);
-      this.foodService.editExistingFood(food);
-      this.editingExistingFood = false;
+    console.log( this.edit ? 'food-dict: Submitted edits to food: ' : 'food-dict: Submitted new food: ', food.name);
+    if (this.edit) {
+      this.foodService.editFood(food);
+      this.edit = false;
     } else {
-      console.log('food-dict: Submitted new food: ', food.name);
-      this.foodService.addFoodToDict(food);
+      this.foodService.addFood(food);
     }
     this.food = new Food();
   }
 
+  /* add new food dialog */
   openAddFoodDialog() {
-    this.foodDialogRef = this.dialog.open(AddFoodDialogComponent);
+    this.addFoodDialogRef = this.dialog.open(AddFoodDialogComponent);
   }
 
+  // TODO remove when done testing
   populateTestFood() {
     this.food = new Food();
     this.food['id'] = 1;

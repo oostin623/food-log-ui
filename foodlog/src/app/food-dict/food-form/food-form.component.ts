@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Food } from '../../model/food';
 
+// FIXME split into edit-form and add-form
 @Component({
   selector: 'app-food-form',
   templateUrl: './food-form.component.html',

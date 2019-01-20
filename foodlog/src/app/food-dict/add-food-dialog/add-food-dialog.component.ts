@@ -2,18 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-food-dialog',
-  template: `
-   <h1 mat-dialog-title>Add Food</h1>
-    <mat-dialog-content>
-      todo: move food form here
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-button>Add</button>
-      <button mat-button>Cancel</button>
-    </mat-dialog-actions>
-    `,
+  templateUrl: './add-food-dialog.component.html',
   styleUrls: ['./add-food-dialog.component.css']
 })
+/**
+ * Add Food Dialog
+ * 
+ * Dialog containing a form for adding a new food to the food dict.
+ */
 export class AddFoodDialogComponent implements OnInit {
 
   constructor() { }

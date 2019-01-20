@@ -1,44 +1,19 @@
-<div>
-
-  <!-- FOOD DICT TABLE -->
-  <h2>Avalible foods:</h2>
-
-  <div *ngFor="let food of foodDict">
-    <div *ngIf="food">
-      <!-- ID -->
-      <div >
+<div class="wrapper">
+  <div>
+    <!-- food table -->
+    <h2>Avalible foods:</h2>
+    <div *ngFor="let food of foodDict">
+      <ng-container *ngIf="food">
         <div >Id: {{ food.id }}</div>
-      </div>
-      <!-- NAME -->
-      <div >
-        <div >Name: {{ food.name }}</div>
-
-      </div>
-      <!-- CALORIES -->
-      <div >
+        <div ><h3>Name: {{ food.name }}</h3></div>
         <div >Calries: {{ food.calories }}</div>
-      </div>
-      <!-- FAT -->
-      <div >
         <div >Fat: {{ food.fat }}</div>
-      </div>
-      <!-- CARBS -->
-      <div >
         <div >Carbs: {{ food.carbs }}</div>
-      </div>
-      <!-- PROTEIN -->
-      <div >
-        <div >Protein: {{ food.protein}}</div>
-      </div>
-      <!-- SERVING SIZE -->
-      <div >
+        <div >Protein: {{ food.protein}}</div>>
         <div >Serving Size: {{ food.servingSize + ' (' + food.servingUnit + ')' }}</div>
-      </div>
-
-      <!-- EDIT BUTTON -->
-      <button (click)="setFoodToEdit(food)">Edit</button>
-    </div>
-    <br>
-
-
+      </ng-container>
   </div>
+    <!-- edit button -->
+    <button (click)="onelect(food)">Edit</button>
+  </div>
+</div>

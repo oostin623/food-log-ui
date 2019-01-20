@@ -11,8 +11,8 @@ export class FoodTableComponent {
   @Input() foodDict: Food[];
   @Output() food = new EventEmitter<Food>();
 
-  private setFoodToEdit(food: Food) {
-    console.log('child: selected food: ', food.name);
+  private onSelect(food: Food) {
+    console.log('( food table ) - food selected: ', food.name);
     this.food.emit(food);
   }
 }

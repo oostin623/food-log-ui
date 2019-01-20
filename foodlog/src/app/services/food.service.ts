@@ -6,14 +6,23 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { tap } from 'rxjs/operators';
 import { Food } from '../model/food';
 
+/* HTTP request headers */
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+/* Food dict url */
+const foodDictUrl = 'api/foods';
+
 
 @Injectable()
+/**
+ * The Food Service.
+ * Handles HTTP requests to back end
+ * Handles state-management of the food dictionary
+  */
 export class FoodService {
 
-  private foodDictUrl = 'api/foods';
+  // FIXME: should this be initialized with the populated food dict instead of an empty array?
   private foodDictSource: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
   private foodDict$: Observable<Food[]> = this.foodDictSource.asObservable();
 
@@ -21,32 +30,33 @@ export class FoodService {
     this.loadFoodDict();
   }
 
+  /* Initialize the food dict */
   private loadFoodDict() {
-    this.http.get<Food[]>(this.foodDictUrl)
-    .pipe(
-      tap(data => console.log('loaded foods: ', data)),
-    )
-    .subscribe(
-      data => this.foodDictSource.next(data));
+    this.http.get<Food[]>(foodDictUrl)
+    .pipe(tap(data => console.log('( food service ) ::: INIT ::: - loaded food dict: ', data)), )
+    .subscribe(data => this.foodDictSource.next(data));
   }
 
+  /* subscribe to the food dict */
   public getFoodDict(): Observable<Food[]> {
     return this.foodDict$;
   }
 
-  public addFoodToDict(food: Food) {
-    this.http.post<Food>(this.foodDictUrl, food, httpOptions)
+  /* add new food */
+  public addFood(food: Food) {
+    this.http.post<Food>(foodDictUrl, food, httpOptions)
     .pipe(
-      tap(data => console.log('added food: ', data)),
+      tap(data => console.log('( food service ) - added food: ', food, 'response: ', data)),
     )
     .subscribe(
       data => this.foodDictSource.next(this.foodDictSource.value.concat(data)));
   }
 
-  public editExistingFood(food: Food) {
-    this.http.put<Food>(this.foodDictUrl, food, httpOptions)
+  /* edit existing food */
+  public editFood(food: Food) {
+    this.http.put<Food>(foodDictUrl, food, httpOptions)
       .pipe(
-        tap(data => console.log('updated food: ', food, 'response: ', data)),
+        tap(data => console.log('( food service ) - updated food: ', food, 'response: ', data)),
       )
       .subscribe();
   }

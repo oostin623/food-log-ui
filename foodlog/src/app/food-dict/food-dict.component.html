@@ -1,37 +1,22 @@
-<div class="container">
+<div class="wrapper">
+
+  <div></div>
 
   <div>
-    <h1>Food Dictionary</h1>
+      <h1>Foods</h1>
+      <!-- populate test food -->
+      <button type="button" class="btn btn-default" (click)="populateTestFood()">Populate Test Food</button>
+      <!-- food form -->
+      <app-food-form *ngIf="!submitted" [editableFood]="food" (food)="onSubmitFood($event)">
+      </app-food-form>
+      <!-- add food -->
+      <button (click)="openAddFoodDialog()">Add Food</button>
   </div>
 
-  <!-- ADD FOOD DIALOG BUTTON -->
-  <!-- <div>
-    <button (click)="openAddFoodDialog()">
-      Add Food
-    </button>
-  </div>
-  <br> -->
-
-  <!-- POPULATE TEST FOOD BUTTON -->
   <div>
-    <button type="button" class="btn btn-default" (click)="populateTestFood()">
-      Populate Test Food
-    </button>
+    <!-- food table -->
+    <app-food-table [foodDict]="foodDict" (food)="onSelectFood($event)"></app-food-table>
   </div>
-  <br>
-
-  <app-food-form *ngIf="!submitted"
-    [editableFood]="food"
-    (food)="onSubmitFood($event)">
-  </app-food-form>
-
-  <!-- IMPORTANT: data sharing must be inside the component tag for async data!!! -->
-  <!-- NOTE: the handler method can have a descriptive name, 
-             but the variable being emitted must be 'food' -->
-  <app-food-table
-    [foodDict]="foodDict" 
-    (food)="onSelectFood($event)">
-  </app-food-table>
 
 
   <!-- MATERIAL TABLE -->
