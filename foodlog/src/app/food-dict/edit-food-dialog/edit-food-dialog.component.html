@@ -1,0 +1,13 @@
+<div>
+    <h1 mat-dialog-title>Edit Food</h1>
+    <mat-dialog-content>
+      <!-- food form -->
+      <app-food-form
+        [food]="data" 
+        (food)="onSubmitFood($event)">
+      </app-food-form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-dialog-close mat-button>Cancel</button>
+    </mat-dialog-actions>
+  </div>

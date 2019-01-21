@@ -3,6 +3,7 @@ import { Food } from '../model/food';
 import { FoodService } from '../services/food.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-dialog.component';
+import { EditFoodDialogComponent } from './edit-food-dialog/edit-food-dialog.component';
 
 @Component({
   selector: 'app-food-dict',
@@ -15,6 +16,8 @@ import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-di
 export class FoodDictComponent implements OnInit {
 
   addFoodDialogRef: MatDialogRef<AddFoodDialogComponent>;
+  editFoodDialogRef: MatDialogRef<EditFoodDialogComponent>;
+
   submitted = false;
   edit = false; // true when form is in "edit mode"
   servingUnits = ['ounces', 'grams', 'cups', 'tablespoons', 'teaspoons', 'container', 'N/A'];
@@ -54,7 +57,29 @@ export class FoodDictComponent implements OnInit {
 
   /* add new food dialog */
   openAddFoodDialog() {
-    this.addFoodDialogRef = this.dialog.open(AddFoodDialogComponent);
+    this.addFoodDialogRef = this.dialog.open(AddFoodDialogComponent, {
+      width: '640px',
+    });
+    this.addFoodDialogRef.afterClosed().subscribe(newFood => {
+      console.log('add food dialog closed');
+      if (!!newFood) {
+        this.foodService.addFood(newFood);
+      }
+    });
+  }
+
+  /* edit food dialog */
+  openEditFoodDialog(food: Food) {
+    this.editFoodDialogRef = this.dialog.open(EditFoodDialogComponent, {
+      width: '640px',
+      data: food
+    });
+    this.editFoodDialogRef.afterClosed().subscribe(newFood => {
+      console.log('add food dialog closed');
+      if (!!newFood) {
+        this.foodService.editFood(newFood);
+      }
+     });
   }
 
   // TODO remove when done testing

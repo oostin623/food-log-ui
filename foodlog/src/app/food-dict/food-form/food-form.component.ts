@@ -9,19 +9,15 @@ import { Food } from '../../model/food';
 })
 export class FoodFormComponent {
 
-  @Input() editableFood: Food;
-  @Output() food = new EventEmitter<Food>();
-
-  private updateEditableFood(food: Food) {
-    console.log('child: selected food: ', food.name);
-    this.food.emit(food);
-  }
+  @Input() food: Food;
+  @Output() newFood = new EventEmitter<Food>();
 
   getServingUnits(): string[] {
     return Food.servingUnits;
   }
 
-  onSubmit() {
-    this.updateEditableFood(this.editableFood);
+  onSubmit(food: Food) {
+    console.log(' ( food form ) - new/updated food: ', food.name);
+    this.newFood.emit(food);
   }
 }

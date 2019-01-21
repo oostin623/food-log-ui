@@ -4,20 +4,13 @@
 
   <div>
       <h1>Foods</h1>
-      <!-- populate test food -->
-      <button type="button" class="btn btn-default" (click)="populateTestFood()">Populate Test Food</button>
-      <!-- food form -->
-      <app-food-form *ngIf="!submitted" [editableFood]="food" (food)="onSubmitFood($event)">
-      </app-food-form>
-      <!-- add food -->
       <button (click)="openAddFoodDialog()">Add Food</button>
   </div>
 
   <div>
     <!-- food table -->
-    <app-food-table [foodDict]="foodDict" (food)="onSelectFood($event)"></app-food-table>
+    <app-food-table [foodDict]="foodDict" (food)="openEditFoodDialog($event)"></app-food-table>
   </div>
-
 
   <!-- MATERIAL TABLE -->
   <!--   <table cdk-table [foodDict]="foodDict">

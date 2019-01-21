@@ -24,6 +24,7 @@ import { FoodDetailsPipe } from './pipes/food-details.pipe';
 import { AddFoodDialogComponent } from './food-dict/add-food-dialog/add-food-dialog.component';
 import { FoodTableComponent } from './food-dict/food-table/food-table.component';
 import { FoodFormComponent } from './food-dict/food-form/food-form.component';
+import { EditFoodDialogComponent } from './food-dict/edit-food-dialog/edit-food-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FoodFormComponent } from './food-dict/food-form/food-form.component';
     FoodDetailsPipe,
     AddFoodDialogComponent,
     FoodTableComponent,
-    FoodFormComponent
+    FoodFormComponent,
+    EditFoodDialogComponent
   ],
   imports: [
     // BrowserModule must import before Material stuff
@@ -56,6 +58,9 @@ import { FoodFormComponent } from './food-dict/food-form/food-form.component';
   providers: [LogDayService, FoodService],
   bootstrap: [AppComponent],
   // dynamically generated dialogs, etc. from angular material
-  entryComponents: [AddFoodDialogComponent],
+  entryComponents: [
+    AddFoodDialogComponent,
+    EditFoodDialogComponent
+  ],
 })
 export class AppModule { }

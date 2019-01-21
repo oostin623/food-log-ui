@@ -1,11 +1,13 @@
 <div>
-    <h1 mat-dialog-title>Add Food</h1>
-    <mat-dialog-content>
-    todo: move food form here
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-button>Add</button>
-      <button mat-dialog-close mat-button>Cancel</button>
-    </mat-dialog-actions>
+  <h1 mat-dialog-title>Add Food</h1>
+  <mat-dialog-content>
+    <!-- food form -->
+    <app-food-form
+      (newFood)="onSubmitFood($event)">
+    </app-food-form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancel</button>
+  </mat-dialog-actions>
 </div>
     

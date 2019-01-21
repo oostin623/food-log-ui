@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Food } from '../../model/food';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-add-food-dialog',
@@ -7,14 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 /**
  * Add Food Dialog
- * 
+ *
  * Dialog containing a form for adding a new food to the food dict.
  */
 export class AddFoodDialogComponent implements OnInit {
-
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<AddFoodDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Food) {}
 
   ngOnInit() {
   }
 
+  onSubmit(food: Food) {
+    console.log('( food dialog ) - adding new food');
+    this.dialogRef.close(food);
+  }
 }

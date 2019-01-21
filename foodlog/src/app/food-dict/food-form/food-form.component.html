@@ -1,24 +1,16 @@
-<div>
-
-  <!-- hide if no food model -->
-  <div *ngIf="editableFood">
-
-    <!-- ADD FOOD FORM -->
-    <form (ngSubmit)="onSubmit()" #editableFoodForm="ngForm">
-      <h2>{{ (editableFood?.id ) 
-        ? 'Editing Exisiting Food with id: ' + editableFood.id 
-        : 'Add New Food' }}
-      </h2>
-
-      <!-- id -->
+<div class="wrapper">
+  <div>
+    <!-- form-->
+    <form (ngSubmit)="onSubmit()" #foodForm="ngForm">
+      <!-- title -->
+      <h2>{{ food?.id ? 'Editing Exisiting Food' + food.id : 'Add New Food' }}</h2>
       <div class="form-group">
-        <input type="hidden" class="form-control" id="id" required [(ngModel)]="editableFood.id" name="id">
+        <input type="hidden" class="form-control" id="id" required [(ngModel)]="food.id" name="id">
       </div>
-
       <!-- name -->
       <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" required [(ngModel)]="editableFood.name" name="name" #name="ngModel">
+        <input type="text" class="form-control" id="name" required [(ngModel)]="food.name" name="name" #name="ngModel">
         <!-- used to display the pop up below -->
       </div>
       <!--pop up warning if name missing -->
@@ -28,7 +20,7 @@
       <!-- calories -->
       <div class="form-group">
         <label for="calories">Calories</label>
-        <input type="number" class="form-control" id="calories" required [(ngModel)]="editableFood.calories" name="calories" #calories="ngModel">
+        <input type="number" class="form-control" id="calories" required [(ngModel)]="food.calories" name="calories" #calories="ngModel">
       </div>
       <!--pop up warning if calories are missing -->
       <div [hidden]="calories.valid || calories.pristine" class="alert alert-danger">
@@ -38,25 +30,25 @@
       <div class="form-group">
         <label for="fat">Fat</label>
         <input type="number" class="form-control" id="fat" required 
-        [(ngModel)]="editableFood.fat" name="fat">
+        [(ngModel)]="food.fat" name="fat">
       </div>
       <!-- carbs -->
       <div class="form-group">
         <label for="carbs">Carbs</label>
         <input type="number" class="form-control" id="carbs" required 
-        [(ngModel)]="editableFood.carbs" name="carbs">
+        [(ngModel)]="food.carbs" name="carbs">
       </div>
       <!-- protein -->
       <div class="form-group">
         <label for="protein">Protein</label>
         <input type="number" class="form-control" id="protein" required 
-        [(ngModel)]="editableFood.protein" name="protein">
+        [(ngModel)]="food.protein" name="protein">
       </div>
       <!-- unit (servings) -->
       <div class="form-group">
         <label for="servingUnit">Serving Unit</label>
         <select class="form-control" id="servingUnit" required 
-        [(ngModel)]="editableFood.servingUnit" name="serving unit">
+        [(ngModel)]="food.servingUnit" name="serving unit">
           <option *ngFor="let unit of getServingUnits()">{{unit}}</option>
         </select>
       </div>
@@ -64,18 +56,13 @@
       <div class="form-group">
         <label for="servings">Serving Size</label>
         <input type="number" class="form-control" id="serving size" required 
-        [(ngModel)]="editableFood.servingSize" name="serving size">
+        [(ngModel)]="food.servingSize" name="serving size">
       </div>
       <br>
-
-      <!-- SUBMIT FORM -->
+      <!-- submit -->
       <div>
-        <button type="submit" class="btn btn-success" [disabled]="!editableFoodForm.form.valid">
-          Submit
-        </button>
+        <button type="submit" class="btn btn-success" [disabled]="!foodForm.form.valid">Submit</button>
       </div>
-
     </form>
   </div>
-
 </div>
