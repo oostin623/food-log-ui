@@ -24,4 +24,8 @@ export class AddFoodDialogComponent implements OnInit {
     console.log('( food dialog ) - adding new food');
     this.dialogRef.close(food);
   }
+
+  addFood(): Food {
+    return new Food();
+  }
 }

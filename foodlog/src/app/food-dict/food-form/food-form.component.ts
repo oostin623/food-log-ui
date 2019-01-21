@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Food } from '../../model/food';
 
 // FIXME split into edit-form and add-form
@@ -7,11 +7,14 @@ import { Food } from '../../model/food';
   templateUrl: './food-form.component.html',
   styleUrls: ['./food-form.component.css']
 })
-export class FoodFormComponent {
+export class FoodFormComponent implements OnInit {
 
   @Input() food: Food;
   @Output() newFood = new EventEmitter<Food>();
 
+  ngOnInit() {
+  }
+  
   getServingUnits(): string[] {
     return Food.servingUnits;
   }

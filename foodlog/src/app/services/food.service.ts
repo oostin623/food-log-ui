@@ -22,9 +22,13 @@ const foodDictUrl = 'api/foods';
   */
 export class FoodService {
 
-  // FIXME: should this be initialized with the populated food dict instead of an empty array?
+  /* the food dict */
   private foodDictSource: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
   private foodDict$: Observable<Food[]> = this.foodDictSource.asObservable();
+
+  /* next id tracker (for adding foods) */
+  private foodIdentitySource: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private foodIdentity$: Observable<number> = this.foodIdentitySource.asObservable();
 
   constructor(private http: HttpClient) {
     this.loadFoodDict();
@@ -42,8 +46,17 @@ export class FoodService {
     return this.foodDict$;
   }
 
+    /* subscribe to the food identity */
+    // public getFoodIdentity(): Observable<number> {
+    //   return this.foodIdentity$;
+    // }
+
   /* add new food */
   public addFood(food: Food) {
+    // set id and increment idenetity
+    food.id = this.foodIdentitySource.getValue();
+    this.foodIdentitySource.next(food.id++);
+
     this.http.post<Food>(foodDictUrl, food, httpOptions)
     .pipe(
       tap(data => console.log('( food service ) - added food: ', food, 'response: ', data)),

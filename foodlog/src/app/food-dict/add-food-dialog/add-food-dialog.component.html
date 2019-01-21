@@ -3,7 +3,8 @@
   <mat-dialog-content>
     <!-- food form -->
     <app-food-form
-      (newFood)="onSubmitFood($event)">
+      [food]="addFood()"
+      (food)="onSubmitFood($event)">
     </app-food-form>
   </mat-dialog-content>
   <mat-dialog-actions>

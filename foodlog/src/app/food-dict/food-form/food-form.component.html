@@ -1,11 +1,11 @@
 <div class="wrapper">
-  <div>
+  <div *ngIf="!!food">
     <!-- form-->
     <form (ngSubmit)="onSubmit()" #foodForm="ngForm">
       <!-- title -->
-      <h2>{{ food?.id ? 'Editing Exisiting Food' + food.id : 'Add New Food' }}</h2>
+      <h2>{{ food?.id ? 'Editing Exisiting Food' + food?.id : 'Add New Food' }}</h2>
       <div class="form-group">
-        <input type="hidden" class="form-control" id="id" required [(ngModel)]="food.id" name="id">
+        <input type="hidden" class="form-control" id="id" [(ngModel)]="food.id" name="id">
       </div>
       <!-- name -->
       <div class="form-group">
