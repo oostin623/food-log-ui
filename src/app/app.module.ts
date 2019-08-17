@@ -8,9 +8,12 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/in-memory-data-service';
 
 // ng material
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 // food-log features
 import { AppComponent } from './app.component';
@@ -19,7 +22,6 @@ import { LogDayService } from './services/logDay.service';
 import { FoodService } from './services/food.service';
 import { FoodDictComponent } from './food-dict/food-dict.component';
 import { AppRoutingModule } from './routing/app-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FoodDetailsPipe } from './pipes/food-details.pipe';
 import { AddFoodDialogComponent } from './food-dict/add-food-dialog/add-food-dialog.component';
 import { FoodTableComponent } from './food-dict/food-table/food-table.component';
@@ -31,7 +33,6 @@ import { EditFoodDialogComponent } from './food-dict/edit-food-dialog/edit-food-
     AppComponent,
     LogFormComponent,
     FoodDictComponent,
-    DashboardComponent,
     FoodDetailsPipe,
     AddFoodDialogComponent,
     FoodTableComponent,
@@ -44,6 +45,7 @@ import { EditFoodDialogComponent } from './food-dict/edit-food-dialog/edit-food-
     MatDialogModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatTabsModule,
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Food } from '../model/food';
 import { FoodService } from '../services/food.service';
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddFoodDialogComponent } from '../food-dict/add-food-dialog/add-food-dialog.component';
 import { EditFoodDialogComponent } from './edit-food-dialog/edit-food-dialog.component';
 

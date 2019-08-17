@@ -3,13 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LogFormComponent } from '../log-form/log-form.component';
 import { FoodDictComponent } from '../food-dict/food-dict.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
 
 const routes: Routes = [
    // default route = redirect to dash
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/food-log', pathMatch: 'full' },
   // main dashboard
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'food-log', component: LogFormComponent },
   { path: 'food-dict', component: FoodDictComponent }
 ];
