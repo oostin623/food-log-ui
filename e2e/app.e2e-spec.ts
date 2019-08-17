@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('foodlog App', () => {
+describe('food-log-ui App', () => {
   let page: AppPage;
 
   beforeEach(() => {

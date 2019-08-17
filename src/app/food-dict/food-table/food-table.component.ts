@@ -9,10 +9,9 @@ import { Food } from '../../model/food';
 export class FoodTableComponent {
 
   @Input() foodDict: Food[];
-  @Output() food = new EventEmitter<Food>();
+  @Output() selectedFood = new EventEmitter<Food>();
 
   onSelect(food: Food) {
-    console.log('( food table ) - food selected: ', food.name);
-    this.food.emit(food);
+    this.selectedFood.emit(food);
   }
 }

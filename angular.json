@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "foodlog": {
+    "food-log-ui": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -51,18 +51,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "foodlog:build"
+            "browserTarget": "food-log-ui:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "foodlog:build:production"
+              "browserTarget": "food-log-ui:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "foodlog:build"
+            "browserTarget": "food-log-ui:build"
           }
         },
         "test": {
@@ -99,7 +99,7 @@
         }
       }
     },
-    "foodlog-e2e": {
+    "food-log-ui-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -108,7 +108,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "foodlog:serve"
+            "devServerTarget": "food-log-ui:serve"
           }
         },
         "lint": {
@@ -125,7 +125,7 @@
       }
     }
   },
-  "defaultProject": "foodlog",
+  "defaultProject": "food-log-ui",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

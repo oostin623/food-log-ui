@@ -7,23 +7,19 @@ import { Food } from '../../model/food';
   templateUrl: './edit-food-dialog.component.html',
   styleUrls: ['./edit-food-dialog.component.css']
 })
-/**
- * Edit Food Dialog
- *
- * Dialog containing a form for editing an existing food
- */
 export class EditFoodDialogComponent implements OnInit {
+
+  food: Food;
 
   constructor(
     public dialogRef: MatDialogRef<EditFoodDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Food) {}
 
   ngOnInit() {
-    console.log('( food dialog ) - now editing ', this.data.name);
-
+    this.food = this.data;
   }
 
-  onSubmit(food: Food) {
-    this.dialogRef.close(food);
+  onSubmit() {
+    this.dialogRef.close(this.food);
   }
 }

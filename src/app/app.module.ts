@@ -12,7 +12,7 @@ import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
-// foodlog features
+// food-log features
 import { AppComponent } from './app.component';
 import { LogFormComponent } from './log-form/log-form.component';
 import { LogDayService } from './services/logDay.service';

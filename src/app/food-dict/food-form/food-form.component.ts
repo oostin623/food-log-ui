@@ -9,18 +9,16 @@ import { Food } from '../../model/food';
 })
 export class FoodFormComponent implements OnInit {
 
-  @Input() food: Food;
+  @Input() food?: Food;
   @Output() newFood = new EventEmitter<Food>();
 
   ngOnInit() {
-  }
-  
-  getServingUnits(): string[] {
-    return Food.servingUnits;
+    if ( !this.food ) {
+      this.food = new Food();
+    }
   }
 
   onSubmit(food: Food) {
-    console.log(' ( food form ) - new/updated food: ', food.name);
     this.newFood.emit(food);
   }
 }

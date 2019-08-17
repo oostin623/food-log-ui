@@ -3,17 +3,17 @@
     <!-- food table -->
     <h2>Avalible foods:</h2>
     <div *ngFor="let food of foodDict">
-
       <div >Id: {{ food.id }}</div>
-      <div ><h3>Name: {{ food.name }}</h3></div>
+      <div >
+        <h3>Name: {{ food.name }}</h3>
+      </div>
       <div >Calries: {{ food.calories }}</div>
       <div >Fat: {{ food.fat }}</div>
       <div >Carbs: {{ food.carbs }}</div>
       <div >Protein: {{ food.protein}}</div>
-      <div >Serving Size: {{ food.servingSize + ' (' + food.servingUnit + ')' }}</div>
-
+    < div >Serving Size: {{ food.servingSize + ' (' + food.servingUnit + ')' }}</div>
       <button (click)="onSelect(food)">Edit</button>
-
-    </div>
-    <!-- edit button -->  </div>
+  </div>
+    <!-- edit button -->  
+  </div>
 </div>

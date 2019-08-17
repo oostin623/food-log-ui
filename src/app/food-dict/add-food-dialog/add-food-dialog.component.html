@@ -1,10 +1,9 @@
 <div>
   <h1 mat-dialog-title>Add Food</h1>
   <mat-dialog-content>
-    <!-- food form -->
+    <!-- food orm -->
     <app-food-form
-      [food]="addFood()"
-      (food)="onSubmitFood($event)">
+      (newFood)="onSubmit(newFood)">
     </app-food-form>
   </mat-dialog-content>
   <mat-dialog-actions>
